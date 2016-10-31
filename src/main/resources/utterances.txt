@@ -1,0 +1,436 @@
+GetMovieInfo Give me information on {movieTitle}
+GetMovieInfo Tell me information on {movieTitle}
+GetMovieInfo Give me information about {movieTitle}
+GetMovieInfo Tell me information about {movieTitle}
+GetMovieInfo Tell me about {movieTitle}
+GetMovieInfo What is the information on {movieTitle}
+GetMovieInfo What is the information about {movieTitle}
+GetMovieInfo Information about {movieTitle}
+GetMovieInfo Information on {movieTitle}
+GetMovieInfo Give me info on {movieTitle}
+GetMovieInfo Tell me info on {movieTitle}
+GetMovieInfo Give me info about {movieTitle}
+GetMovieInfo Tell me info about {movieTitle}
+GetMovieInfo What is the info on {movieTitle}
+GetMovieInfo What is the info about {movieTitle}
+GetMovieInfo info about {movieTitle}
+GetMovieInfo info on {movieTitle}
+GetMovieInfo Give me information on it
+GetMovieInfo Tell me information on it
+GetMovieInfo Give me information about it
+GetMovieInfo Tell me information about it
+GetMovieInfo What is the information on it
+GetMovieInfo What is the information about it
+GetMovieInfo Information about it
+GetMovieInfo Information on it
+GetMovieInfo Give me info on it
+GetMovieInfo Tell me info on it
+GetMovieInfo Give me info about it
+GetMovieInfo Tell me info about it
+GetMovieInfo What is the info on it
+GetMovieInfo What is the info about it
+GetMovieInfo info about it
+GetMovieInfo info on it
+GetMovieInfo Give me it's information
+GetMovieInfo Tell me it's information
+GetMovieInfo Give me it's info
+GetMovieInfo Tell me it's info
+GetMovieInfo Give me details on {movieTitle}
+GetMovieInfo Tell me details on {movieTitle}
+GetMovieInfo Give me details about {movieTitle}
+GetMovieInfo Tell me details about {movieTitle}
+GetMovieInfo What are the details on {movieTitle}
+GetMovieInfo Details about {movieTitle}
+GetMovieInfo Details on {movieTitle}
+GetMovieInfo Details for {movieTitle}
+GetMovieInfo Give me details on it
+GetMovieInfo Tell me details on it
+GetMovieInfo Give me details about it
+GetMovieInfo Tell me details about it
+GetMovieInfo What are the details on it
+GetMovieInfo Details about it
+GetMovieInfo Details on it
+GetMovieInfo Details for it
+GetMovieInfo Give me details on this movie
+GetMovieInfo Tell me details on this movie
+GetMovieInfo Give me details about this movie
+GetMovieInfo Tell me details about this movie
+GetMovieInfo What are the details on this movie
+GetMovieInfo Details about this movie
+GetMovieInfo Details on this movie
+GetMovieInfo Details for this movie
+GetMovieInfo Give me information on this movie
+GetMovieInfo Tell me information on this movie
+GetMovieInfo Give me information about this movie
+GetMovieInfo Tell me information about this movie
+GetMovieInfo What is the information on this movie
+GetMovieInfo What is the information about this movie
+GetMovieInfo Information about this movie
+GetMovieInfo Information on this movie
+GetMovieInfo Give me info on this movie
+GetMovieInfo Tell me info on this movie
+GetMovieInfo Give me info about this movie
+GetMovieInfo Tell me info about this movie
+GetMovieInfo What is the info on this movie
+GetMovieInfo What is the info about this movie
+GetMovieInfo info about this movie
+GetMovieInfo info on this movie
+GetMovieInfo Give me this movie's information
+GetMovieInfo Tell me this movie's information
+GetMovieInfo Give me this movie's info
+GetMovieInfo Tell me this movie's info
+GetMoviePlot Tell me the plot of the movie {movieTitle}
+GetMoviePlot Tell me the plot of {movieTitle}
+GetMoviePlot Give me the plot of the movie {movieTitle}
+GetMoviePlot Give me the plot of {movieTitle}
+GetMoviePlot What is the plot of the movie {movieTitle}
+GetMoviePlot What is the plot of {movieTitle}
+GetMoviePlot What is the plot to {movieTitle}
+GetMoviePlot What is the movie {movieTitle} about
+GetMoviePlot What is {movieTitle} about
+GetMoviePlot What is the {movieTitle} movie about
+GetMoviePlot What is it about
+GetMoviePlot What is the plot
+GetMoviePlot What's it about
+GetMoviePlot What's its plot
+GetMoviePlot Tell me its plot
+GetMoviePlot Give me its plot
+GetMovieDirector Who directed {movieTitle}
+GetMovieDirector Who directed the movie {movieTitle}
+GetMovieDirector Who directed the {movieTitle} movie
+GetMovieDirector Who is the director of {movieTitle}
+GetMovieDirector Who is the director of the movie {movieTitle}
+GetMovieDirector Who is the director of the {movieTitle} movie
+GetMovieDirector Give me the director of {movieTitle}
+GetMovieDirector Give me the director of the movie {movieTitle}
+GetMovieDirector Give me the director of the {movieTitle} movie
+GetMovieDirector Give me the name of the director of {movieTitle}
+GetMovieDirector Give me the name of the director of the movie {movieTitle}
+GetMovieDirector Give me the name of the director of the {movieTitle} movie
+GetMovieDirector Tell me the director of {movieTitle}
+GetMovieDirector Tell me the director of the movie {movieTitle}
+GetMovieDirector Tell me the director of the {movieTitle} movie
+GetMovieDirector Tell me the name of the director of {movieTitle}
+GetMovieDirector Tell me the name of the director of the movie {movieTitle}
+GetMovieDirector Tell me the name of the director of the {movieTitle} movie
+GetMovieDirector Name the director of {movieTitle}
+GetMovieDirector Name the director of the movie {movieTitle}
+GetMovieDirector Name the director of the {movieTitle} movie
+GetMovieDirector Who directed it
+GetMovieDirector Who directed this movie
+GetMovieDirector It's director
+GetMovieDirector Tell me who directed it
+GetMovieDirector Tell me who directed this movie
+GetMovieDirector Give me the name of it's director
+GetMovieDirector Give me the name of this movies director
+GetMovieDirector Name the director
+GetMovieDirector Name the director of this movie
+GetMovieProducer Who produced {movieTitle}
+GetMovieProducer Who produced the movie {movieTitle}
+GetMovieProducer Who produced the {movieTitle} movie
+GetMovieProducer Who is the producer of {movieTitle}
+GetMovieProducer Who is the producer of the movie {movieTitle}
+GetMovieProducer Who is the producer of the {movieTitle} movie
+GetMovieProducer Give me the producer of {movieTitle}
+GetMovieProducer Give me the producer of the movie {movieTitle}
+GetMovieProducer Give me the producer of the {movieTitle} movie
+GetMovieProducer Give me the name of the producer of {movieTitle}
+GetMovieProducer Give me the name of the producer of the movie {movieTitle}
+GetMovieProducer Give me the name of the producer of the {movieTitle} movie
+GetMovieProducer Tell me the producer of {movieTitle}
+GetMovieProducer Tell me the producer of the movie {movieTitle}
+GetMovieProducer Tell me the producer of the {movieTitle} movie
+GetMovieProducer Tell me the name of the producer of {movieTitle}
+GetMovieProducer Tell me the name of the producer of the movie {movieTitle}
+GetMovieProducer Tell me the name of the producer of the {movieTitle} movie
+GetMovieProducer Name the producer of {movieTitle}
+GetMovieProducer Name the producer of the movie {movieTitle}
+GetMovieProducer Name the producer of the {movieTitle} movie
+GetMovieProducer Who produced it
+GetMovieProducer Who produced this movie
+GetMovieProducer It's producer
+GetMovieProducer Tell me who produced it
+GetMovieProducer Tell me who produced this movie
+GetMovieProducer Give me the name of it's producer
+GetMovieProducer Give me the name of this movies producer
+GetMovieProducer Name the producer
+GetMovieProducer Name the producer of this movie
+GetMovieWriter Who wrote {movieTitle}
+GetMovieWriter Who wrote the movie {movieTitle}
+GetMovieWriter Who wrote the {movieTitle} movie
+GetMovieWriter Who is the writer of {movieTitle}
+GetMovieWriter Who is the writer of the movie {movieTitle}
+GetMovieWriter Who is the writer of the {movieTitle} movie
+GetMovieWriter Give me the writer of {movieTitle}
+GetMovieWriter Give me the writer of the movie {movieTitle}
+GetMovieWriter Give me the writer of the {movieTitle} movie
+GetMovieWriter Give me the name of the writer of {movieTitle}
+GetMovieWriter Give me the name of the writer of the movie {movieTitle}
+GetMovieWriter Give me the name of the writer of the {movieTitle} movie
+GetMovieWriter Tell me the writer of {movieTitle}
+GetMovieWriter Tell me the writer of the movie {movieTitle}
+GetMovieWriter Tell me the writer of the {movieTitle} movie
+GetMovieWriter Tell me the name of the writer of {movieTitle}
+GetMovieWriter Tell me the name of the writer of the movie {movieTitle}
+GetMovieWriter Tell me the name of the writer of the {movieTitle} movie
+GetMovieWriter Name the writer of {movieTitle}
+GetMovieWriter Name the writer of the movie {movieTitle}
+GetMovieWriter Name the writer of the {movieTitle} movie
+GetMovieWriter Who wrote it
+GetMovieWriter Who wrote this movie
+GetMovieWriter It's writer
+GetMovieWriter Tell me who wrote it
+GetMovieWriter Tell me who wrote this movie
+GetMovieWriter Give me the name of it's writer
+GetMovieWriter Give me the name of this movies writer
+GetMovieWriter Name the writer
+GetMovieWriter Name the writer of this movie
+GetMovieComposer Who composed {movieTitle}
+GetMovieComposer Who composed the movie {movieTitle}
+GetMovieComposer Who composed the {movieTitle} movie
+GetMovieComposer Who composed the music for {movieTitle}
+GetMovieComposer Who composed the music for the movie {movieTitle}
+GetMovieComposer Who composed the music for the {movieTitle} movie
+GetMovieComposer Who wrote the music for {movieTitle}
+GetMovieComposer Who wrote the music for the movie {movieTitle}
+GetMovieComposer Who wrote the music for the {movieTitle} movie
+GetMovieComposer Who created the music for {movieTitle}
+GetMovieComposer Who created the music for the movie {movieTitle}
+GetMovieComposer Who created the music for the {movieTitle} movie
+GetMovieComposer Who is the composer of {movieTitle}
+GetMovieComposer Who is the composer of the movie {movieTitle}
+GetMovieComposer Who is the composer of the {movieTitle} movie
+GetMovieComposer Give me the composer of {movieTitle}
+GetMovieComposer Give me the composer of the movie {movieTitle}
+GetMovieComposer Give me the composer of the {movieTitle} movie
+GetMovieComposer Give me the name of the composer of {movieTitle}
+GetMovieComposer Give me the name of the composer of the movie {movieTitle}
+GetMovieComposer Give me the name of the composer of the {movieTitle} movie
+GetMovieComposer Give me the name of who composed the music of {movieTitle}
+GetMovieComposer Give me the name of who composed the music of the movie {movieTitle}
+GetMovieComposer Give me the name of who composed the music of the {movieTitle} movie
+GetMovieComposer Give me the name of who created the music of {movieTitle}
+GetMovieComposer Give me the name of who created the music of the movie {movieTitle}
+GetMovieComposer Give me the name of who created the music of the {movieTitle} movie
+GetMovieComposer Give me the name of who wrote the music of {movieTitle}
+GetMovieComposer Give me the name of who wrote the music of the movie {movieTitle}
+GetMovieComposer Give me the name of who wrote the music of the {movieTitle} movie
+GetMovieComposer Tell me the composer of {movieTitle}
+GetMovieComposer Tell me the composer of the movie {movieTitle}
+GetMovieComposer Tell me the composer of the {movieTitle} movie
+GetMovieComposer Tell me the name of the composer of {movieTitle}
+GetMovieComposer Tell me the name of the composer of the movie {movieTitle}
+GetMovieComposer Tell me the name of the composer of the {movieTitle} movie
+GetMovieComposer Tell me the name of who composed the music of {movieTitle}
+GetMovieComposer Tell me the name of who composed the music of the movie {movieTitle}
+GetMovieComposer Tell me the name of who composed the music of the {movieTitle} movie
+GetMovieComposer Tell me the name of who created the music of {movieTitle}
+GetMovieComposer Tell me the name of who created the music of the movie {movieTitle}
+GetMovieComposer Tell me the name of who created the music of the {movieTitle} movie
+GetMovieComposer Tell me the name of who wrote the music of {movieTitle}
+GetMovieComposer Tell me the name of who wrote the music of the movie {movieTitle}
+GetMovieComposer Tell me the name of who wrote the music of the {movieTitle} movie
+GetMovieComposer Name the the composer of {movieTitle}
+GetMovieComposer Name the the composer of the movie {movieTitle}
+GetMovieComposer Name the the composer of the {movieTitle} movie
+GetMovieComposer Name the who composed the music of {movieTitle}
+GetMovieComposer Name the who composed the music of the movie {movieTitle}
+GetMovieComposer Name the who composed the music of the {movieTitle} movie
+GetMovieComposer Name the who created the music of {movieTitle}
+GetMovieComposer Name the who created the music of the movie {movieTitle}
+GetMovieComposer Name the who created the music of the {movieTitle} movie
+GetMovieComposer Name the who wrote the music of {movieTitle}
+GetMovieComposer Name the who wrote the music of the movie {movieTitle}
+GetMovieComposer Name the who wrote the music of the {movieTitle} movie
+GetMovieComposer Who composed it
+GetMovieComposer Who composed this movie
+GetMovieComposer It's composer
+GetMovieComposer Tell me who composed it
+GetMovieComposer Tell me who composed this movie
+GetMovieComposer Give me the name of it's composer
+GetMovieComposer Give me the name of this movies composer
+GetMovieComposer Name the composer
+GetMovieComposer Name the composer of this movie
+GetMovieComposer Who created the music for it
+GetMovieComposer Who composed the music for it
+GetMovieComposer Who created the music for this movie
+GetMovieComposer Tell me who created the music for it
+GetMovieComposer Tell me who created the music for this movie
+GetMovieComposer Give me the name of who created the music for it
+GetMovieComposer Give me the name of who created the music for this movie
+GetMovieComposer Tell me the name of who created the music for it
+GetMovieComposer Tell me the name of who created the music for this movie
+GetMovieComposer Name the creator of the music of this movie
+GetMovieComposer Who wrote the music for it
+GetMovieComposer Who wrote the music for this movie
+GetMovieComposer Tell me who wrote the music for it
+GetMovieComposer Tell me who wrote the music for this movie
+GetMovieComposer Give me the name of who wrote the music for it
+GetMovieComposer Give me the name of who wrote the music for this movie
+GetMovieComposer Tell me the name of who wrote the music for it
+GetMovieComposer Tell me the name of who wrote the music for this movie
+GetMovieComposer Name the writer of the music of this movie
+GetMovieReleaseDate When was {movieTitle} released
+GetMovieReleaseDate When was the release date for {movieTitle}
+GetMovieReleaseDate When will {movieTitle} be released
+GetMovieReleaseDate When is the release date for {movieTitle}
+GetMovieReleaseDate When was it released
+GetMovieReleaseDate When was the release date for it
+GetMovieReleaseDate When will it be released
+GetMovieReleaseDate When is the release date for it
+GetMovieReleaseDate When was this movie released
+GetMovieReleaseDate When was the release date for this movie
+GetMovieReleaseDate When will this movie be released
+GetMovieReleaseDate When is the release date for this movie
+GetMovieReleaseDate What year was {movieTitle} released
+GetMovieReleaseDate What year was it released
+GetMovieReleaseDate What year was this movie released
+GetMovieReleaseDate What day was {movieTitle} released
+GetMovieReleaseDate What day was it released
+GetMovieReleaseDate What day was this movie released
+GetMovieReleaseDate What year will {movieTitle} be released
+GetMovieReleaseDate What year will it be released
+GetMovieReleaseDate What year will this movie be released
+GetMovieReleaseDate What day will {movieTitle} be released
+GetMovieReleaseDate What day will it be released
+GetMovieReleaseDate What day will this movie be released
+GetMovieReleaseDate What is the release date for {movieTitle}
+GetMovieReleaseDate What is the release date for it
+GetMovieReleaseDate What is the release date for this movie
+GetMovieReleaseDate On what date was {movieTitle} released
+GetMovieReleaseDate On which date was {movieTitle} released
+GetMovieReleaseDate On what day was {movieTitle} released
+GetMovieReleaseDate On which day was {movieTitle} released
+GetMovieReleaseDate On what date was it released
+GetMovieReleaseDate On which date was it released
+GetMovieReleaseDate On what day was it released
+GetMovieReleaseDate On which day was it released
+GetMovieReleaseDate On what date was this movie released
+GetMovieReleaseDate On which date was this movie released
+GetMovieReleaseDate On what day was this movie released
+GetMovieReleaseDate On which day was this movie released
+GetMovieCast Cast of {movieTitle}
+GetMovieCast Cast of it
+GetMovieCast Cast of this movie
+GetMovieCast What is the cast of {movieTitle}
+GetMovieCast Who is the cast of {movieTitle}
+GetMovieCast Who are the cast of {movieTitle}
+GetMovieCast Tell me the cast of {movieTitle}
+GetMovieCast Give me the cast of {movieTitle}
+GetMovieCast List the cast of {movieTitle}
+GetMovieCast Who played in {movieTitle}
+GetMovieCast Who are the actors of {movieTitle}
+GetMovieCast Who are the actors in {movieTitle}
+GetMovieCast Who stars in {movieTitle}
+GetMovieCast Who are the stars in {movieTitle}
+GetMovieCast Who are the stars of {movieTitle}
+GetMovieCast List the stars in {movieTitle}
+GetMovieCast List the stars of {movieTitle}
+GetMovieCast Tell me who's in {movieTitle}
+GetMovieCast Who does {movieTitle} include
+GetMovieCast Who is included in {movieTitle}
+GetMovieCast Cast of it
+GetMovieCast What is the cast of it
+GetMovieCast Who is the cast of it
+GetMovieCast Who are the cast of it
+GetMovieCast Tell me the cast of it
+GetMovieCast Give me the cast of it
+GetMovieCast List the cast of it
+GetMovieCast Who played in it
+GetMovieCast Who are the actors of it
+GetMovieCast Who are the actors in it
+GetMovieCast Who stars in it
+GetMovieCast Who are the stars in it
+GetMovieCast Who are the stars of it
+GetMovieCast List the stars in it
+GetMovieCast List the stars of it
+GetMovieCast Tell me who's in it
+GetMovieCast Who does it include
+GetMovieCast Who is included in it
+GetMovieCast Cast of this movie
+GetMovieCast What is the cast of this movie
+GetMovieCast Who is the cast of this movie
+GetMovieCast Who are the cast of this movie
+GetMovieCast Tell me the cast of this movie
+GetMovieCast Give me the cast of this movie
+GetMovieCast List the cast of this movie
+GetMovieCast Who played in this movie
+GetMovieCast Who are the actors of this movie
+GetMovieCast Who are the actors in this movie
+GetMovieCast Who stars in this movie
+GetMovieCast Who are the stars in this movie
+GetMovieCast Who are the stars of this movie
+GetMovieCast List the stars in this movie
+GetMovieCast List the stars of this movie
+GetMovieCast Tell me who's in this movie
+GetMovieCast Who does movie include
+GetMovieCast Who is included in this movie
+GetMovieCast Who's in it
+GetMovieCast Who's in {movieTitle}
+GetCommonMovies Tell me the common movies between {firstActor} and {secondActor}
+GetCommonMovies Give me the common movies between {firstActor} and {secondActor}
+GetCommonMovies What are the common movies between {firstActor} and {secondActor}
+GetCommonMovies What movies are {firstActor} and {secondActor} in
+GetCommonMovies What movies are both {firstActor} and {secondActor} in
+GetCommonMovies Give me the movies that {firstActor} and {secondActor} are in
+GetCommonMovies Tell me the movies that {firstActor} and {secondActor} are in 
+GetCommonMovies Give me the movies that {firstActor} and {secondActor} are in together
+GetCommonMovies Tell me the movies that {firstActor} and {secondActor} are in together
+GetCommonMovies Give me what movies that {firstActor} and {secondActor} are in
+GetCommonMovies Tell me what movies that {firstActor} and {secondActor} are in 
+GetCommonMovies Give me what movies that {firstActor} and {secondActor} are in together
+GetCommonMovies Tell me what movies that {firstActor} and {secondActor} are in together
+GetCommonMovies Give me what movies {firstActor} and {secondActor} are in
+GetCommonMovies Tell me what movies {firstActor} and {secondActor} are in 
+GetCommonMovies Give me what movies {firstActor} and {secondActor} are in together
+GetCommonMovies Tell me what movies {firstActor} and {secondActor} are in together
+GetCommonMovies What movies do {firstActor} and {secondActor} have in common
+GetCommonMovies What movies are {firstActor} and {secondActor} both in
+GetCommonMovies What movies star {firstActor} and {secondActor}
+GetCommonMovies What movies include {firstActor} and {secondActor}
+GetCommonMovies movies that {firstActor} and {secondActor} are in
+GetCommonMovies movies that {firstActor} and {secondActor} star in
+GetCommonMovies movies that {firstActor} and {secondActor} act in
+GetStreamingSources where can I watch {movieTitle}
+GetStreamingSources where can I stream {movieTitle}
+GetStreamingSources where can I find {movieTitle}
+GetStreamingSources how can I watch {movieTitle}
+GetStreamingSources how can I stream {movieTitle}
+GetStreamingSources how can I find {movieTitle}
+GetStreamingSources watch {movieTitle}
+GetStreamingSources stream {movieTitle}
+GetStreamingSources find {movieTitle}
+Yes yes
+Yes yes please
+Yes sure
+Yes yupp
+Yes yes that one
+No no
+No no thank you
+No nope
+No not that one
+TryAgain try again
+TryAgain try again please
+TryAgain I'd like to try again
+TryAgain retry
+TryAgain retry request
+TryAgain retry please
+TryAgain I'd like to retry
+KeepGoing keep going
+KeepGoing continue
+KeepGoing Please keep going
+KeepGoing Please continue
+Repeat repeat
+Repeat say that again
+Repeat what did you say
+Repeat what did you just say
+Repeat please repeat that
+Repeat please repeat
+Repeat say it again
+Repeat repeat that
+Repeat repeat that please
+CustomStop I am done
+CustomStop I'm done
+CustomStop No Thank you
+CustomStop No More
+CustomStop Finish

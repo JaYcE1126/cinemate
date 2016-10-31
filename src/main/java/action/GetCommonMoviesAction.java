@@ -1,0 +1,144 @@
+package action;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.amazon.speech.speechlet.Session;
+
+import dataaccess.Dao;
+import dataaccess.tmdb.ActorIdDao;
+import dataaccess.tmdb.CommonMoviesDao;
+import dialog.Dialog;
+import exception.TmdbApiException;
+import utility.Constants;
+import utility.Sentences;
+import value.Actor;
+
+public class GetCommonMoviesAction extends Action{
+	private static final Logger logger = LoggerFactory.getLogger(GetCommonMoviesAction.class);
+
+	private List<String> userInput = new ArrayList<String>();
+	private List<Actor> actorList = new ArrayList<Actor>();
+	private List<String> commonMoviesResponse;
+
+	
+	public GetCommonMoviesAction(List<String> userInput, Session session){
+		logger.info("Entered: [userInput: {}]", userInput);
+		setActionComplete(false);
+		this.userInput = userInput;
+		this.session = session;
+		this.alexaResponse = new Dialog();
+		logger.info("Exited");
+	}
+	
+	public void performAction() throws TmdbApiException{
+		logger.info("Entered");
+		
+		for (String userInput : this.userInput){
+			logger.debug("userInput: [{}]", userInput);
+			if (userInput == null || userInput.length()==0){
+				alexaResponse.setInitSentence(Sentences.speakActor);
+				alexaResponse.setRepromptSentence(Sentences.speakActorReprompt);
+				alexaResponse.setIsTell(false);
+				setActionComplete(true);
+				session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+
+				logger.info("Exited");
+				return;
+			}
+			setActor(userInput);
+			if (getActionComplete()) {
+				logger.info("Exited");
+				return;
+			}
+		}
+		setCommonMoviesList();
+		if (commonMoviesResponse != null) actionSuccess();
+		logger.debug("alexaResponse: [{}]", getDialog().toString());
+		logger.info("Exited");
+	}
+	
+	public void reattempt(String intentName) throws TmdbApiException{
+		//no reattempt for this action.
+	}
+	
+	private void setActor(String userInput) throws TmdbApiException{
+		logger.info("Entered: [userInput: {}]",userInput);
+		
+		Dao actorIdDao = new ActorIdDao(userInput);
+		int daoReturnCode = actorIdDao.execute();
+		HashMap<String, Object> responseData;
+		
+		if (daoReturnCode == 0) { //a single move match was found
+			responseData = actorIdDao.getData();
+			int actorId = (int)responseData.get(Constants.TMDB_RESPONSE_ID);
+			String actorName = (String)responseData.get(Constants.TMDB_RESPONSE_NAME);
+
+			actorList.add(new Actor(actorId, actorName));
+			logger.debug("Created Actor [actorId: {}, actorName: {}]", actorId, actorName);
+			
+		} else if(daoReturnCode == 1){ //no movie was found
+			alexaResponse.setInitSentence(Sentences.cannotFindActor(userInput));
+			alexaResponse.setRepromptSentence(Sentences.cannotFindActorReprompt(userInput));
+			alexaResponse.setIsTell(false);
+			setActionComplete(true);
+			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+
+		} else {
+			responseData = actorIdDao.getData();
+			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
+			setActionComplete(true);
+			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			throw new TmdbApiException(errorMessage);
+		}		
+		
+		logger.info("Exited");
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void setCommonMoviesList() throws TmdbApiException{
+		logger.info("Entered: actorList: {}",actorList);
+		
+		Dao commonMoviesDao = new CommonMoviesDao(actorList);
+		int daoReturnCode = commonMoviesDao.execute();
+		HashMap<String, Object> responseData;
+		
+		if (daoReturnCode == 0) { //a single move match was found
+			responseData = commonMoviesDao.getData();
+			commonMoviesResponse = (List<String>)responseData.get(Constants.DAO_RESPONSE_COMMON_MOVIES);
+			logger.debug("Retrieved [{}] common movies: {}", commonMoviesResponse.size(), commonMoviesResponse);
+			
+		} else if(daoReturnCode == 1){ //no movie was found
+			setDialogIsAsk(Sentences.noCommonMovies(actorList), Sentences.noCommonMoviesReprompt);
+
+		} else {
+			responseData = commonMoviesDao.getData();
+			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
+			throw new TmdbApiException(errorMessage);
+		}		
+		
+		setActionComplete(true);
+		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		
+		logger.info("Exited");
+	}
+	
+	private void actionSuccess(){
+		logger.info("Entered");
+		
+		setActionComplete(true);
+		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+
+		//TODO Card Info
+		setDialogIsAsk(Sentences.commonMovies(commonMoviesResponse, actorList), Sentences.commonMoviesReprompt, "", "");
+	
+		logger.info("Exited");
+
+	}
+
+}

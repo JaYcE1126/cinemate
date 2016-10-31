@@ -1,0 +1,125 @@
+{
+  "intents": [
+    {
+      "intent": "GetMovieInfo",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetMoviePlot",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetMovieDirector",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetMovieProducer",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetMovieWriter",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetMovieComposer",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetMovieReleaseDate",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetMovieCrew",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetStreamingSources",
+      "slots": [
+        {
+          "name": "movie",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+    {
+      "intent": "GetCommonMovies",
+      "slots": [
+        {
+          "name": "firstActor",
+          "type": "LIST_OF_ACTORS"
+        },
+        {
+          "name": "secondActor",
+          "type": "LIST_OF_ACTORS"
+        }
+      ]
+    },
+    {
+      "intent": "KeepGoing"
+    },
+    {
+      "intent": "Repeat"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "TryAgain"
+    },
+    {
+      "intent": "Yes"
+    },
+    {
+      "intent": "No"
+    },
+    {
+    	"intent": "CustomStop"
+    }
+  ]
+}

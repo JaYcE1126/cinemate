@@ -1,0 +1,15 @@
+Short Skill Description: This skill provides a vast amount of movie information for all movies lovers, including common movies between two actors.
+Full SKill Description: 
+Version 2.0: Cinemate can now give you common movies between two actors.  You can ask it any variation of "tell me the movies that Brad Pitt and Matt Damon are in".
+
+With this skill the Amazon Echo can provide you with all of the important information on a movie.  This not only includes, plot, cast list, and release date, but also the director, producers, and original music composer.
+
+Cinemate provides an intuitive and natural user interface to make it as easy as possible for anyone to get movie information quickly.
+
+Example Phrases:
+1. Alexa, ask movie guide to tell me about Rocky 4
+2. Alexa, ask movie guide who directed The Jungle Book
+3. Alexa, ask movie guide to give me the cast of Suicide Squad
+
+Keywords:
+movie,movies,info,information,film,cinema
