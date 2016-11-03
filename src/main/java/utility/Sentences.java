@@ -108,7 +108,11 @@ public class Sentences {
 		
 		StringBuilder sentence = new StringBuilder("<speak><s>");
 		sentence.append(movie.getTitle()); 
-		sentence.append(" was released on ");
+		if (Utilities.isPastDate(movie.getReleaseDate())){
+			sentence.append(" was released on ");
+		} else {
+			sentence.append(" will be released on ");
+		}
 		sentence.append(movie.getReleaseDate());
 		sentence.append(" and has a runtime of ");
 		sentence.append(hours);
@@ -157,6 +161,40 @@ public class Sentences {
 	}
 	
 	public static final String movieReleaseDateReprompt =
+			"<speak>" + 
+			"<s>I can tell you other things about this movie, like it's producers, writers, original music composer, or cast.</s>" +
+			"<s>You can also ask me for information about another movie if you'd like.</s>" +
+			"<s>Please tell me what more you would like to know?</s>" + 
+			"</speak>";
+	
+	public static String movieRuntime(Movie movie){
+		int hours = Integer.valueOf(movie.getRuntime())/60;
+		int mins = Integer.valueOf(movie.getRuntime())%60;
+		
+		StringBuilder sentence = new StringBuilder("<speak><s>");
+		if (movie.getReleaseDate().length() > 0){
+			sentence.append(movie.getTitle()); 
+			sentence.append(" has a runtime of ");
+			sentence.append(hours);
+			if (hours>1){
+				sentence.append(" hours and ");
+			}else if (hours==1){
+				sentence.append(" hour and ");
+			}
+			sentence.append(mins);
+			sentence.append(" minutes.</s><s>What else would you like to know about ");
+			sentence.append(movie.getTitle());
+			sentence.append(".</s></speak>");
+		} else {
+			sentence.append("I cannot find the release date for ");
+			sentence.append(movie.getTitle()); 
+			sentence.append("</s><s>What else would you like to know about this movie?</s></speak>"); 
+		}
+
+		return sentence.toString();
+	}
+	
+	public static final String movieRuntimeReprompt =
 			"<speak>" + 
 			"<s>I can tell you other things about this movie, like it's producers, writers, original music composer, or cast.</s>" +
 			"<s>You can also ask me for information about another movie if you'd like.</s>" +

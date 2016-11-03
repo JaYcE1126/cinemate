@@ -11,10 +11,10 @@ import utility.Constants;
 import utility.Sentences;
 import value.Movie;
 
-public class GetMovieProducerAction extends GetMovieAction{
-	private static final Logger logger = LoggerFactory.getLogger(GetMovieProducerAction.class);
+public class GetMovieRuntimeAction extends GetMovieAction{
+	private static final Logger logger = LoggerFactory.getLogger(GetMovieRuntimeAction.class);
 
-	public GetMovieProducerAction(String userInput, Session session){
+	public GetMovieRuntimeAction(String userInput, Session session){
 		super(userInput, session);
 	}
 	
@@ -26,7 +26,9 @@ public class GetMovieProducerAction extends GetMovieAction{
 			if (super.movie!=null){
 				actionSuccess();
 			}else {
-				setDialogIsAsk(Sentences.speakMovie, Sentences.speakMovieReprompt);
+				alexaResponse.setInitSentence(Sentences.speakMovie);
+				alexaResponse.setRepromptSentence(Sentences.speakMovieReprompt);
+				alexaResponse.setIsTell(false);
 			}
 		} else {
 			setMovieId();
@@ -54,9 +56,10 @@ public class GetMovieProducerAction extends GetMovieAction{
 		
 		setActionComplete(true);
 		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());	
-		setDialogIsAsk(Sentences.movieProducer(super.movie), Sentences.movieProducerReprompt, 
-				movie.getTitle(), CardContent.movieProducer(super.movie), movie.getPosterLocation());	
+		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+
+		//TODO Card Content
+		setDialogIsAsk(Sentences.movieRuntime(super.movie),Sentences.movieRuntimeReprompt, movie.getTitle(),CardContent.movieRuntime(movie), movie.getPosterLocation());
 		
 		logger.info("Exited");
 

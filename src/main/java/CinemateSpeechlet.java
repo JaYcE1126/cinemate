@@ -2,13 +2,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.amazon.speech.slu.Intent;
-import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.LaunchRequest;
 import com.amazon.speech.speechlet.Session;
@@ -20,24 +18,31 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 
 import action.*;
 import dialog.Dialog;
+import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
 import utility.Utilities;
-import wrapper.MovieIdWrapper;
 
+import co.voicelabs.sdk.alexa.VoiceInsights;
 
-/**
- * This sample shows how to create a simple speechlet for handling speechlet requests.
- */
+//http://stackoverflow.com/questions/4062022/how-to-convert-words-to-a-number
+
 public class CinemateSpeechlet implements Speechlet {
 	private static final Logger logger = LoggerFactory.getLogger(CinemateSpeechlet.class);
-	Action action;
-	Dialog dialog;
+
+	private VoiceInsights voiceInsights = null;
+	private String viAppToken =  "3f19179c-24ad-38bd-8b5e-70ca25e422a1";
+	
+	private Action action;
+	private Dialog dialog;
 	
 	public void onSessionStarted(final SessionStartedRequest request, final Session session) throws SpeechletException {
 		logger.info("--START SESSION--: requestId={}, sessionId={}", request.getRequestId(), session.getSessionId());
 		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, true);
 		dialog = new Dialog();
+		
+    /***** VoiceInsights Initialize *****/
+		voiceInsights = new VoiceInsights(viAppToken, session);
 
 	}
 
@@ -46,6 +51,7 @@ public class CinemateSpeechlet implements Speechlet {
 		
 		dialog.setInitSentence(Sentences.welcome);
 		dialog.setRepromptSentence(Sentences.welcomeReprompt);
+		dialog.setCardContent(Constants.CARD_TITLE_WELCOME, CardContent.welcome);
 		dialog.setIsTell(false);
 		
 		logger.info("Exited: [dialog: {}]",dialog.toString());
@@ -54,7 +60,6 @@ public class CinemateSpeechlet implements Speechlet {
 
 	public SpeechletResponse onIntent(final IntentRequest request, final Session session) throws SpeechletException {
 
-//TODO getMovieReleaseDate
 		Intent intent = request.getIntent();
 		String intentName = intent.getName();
 		logger.info("intentName: {}", intentName);
@@ -109,6 +114,20 @@ public class CinemateSpeechlet implements Speechlet {
 					case Constants.INTENT_GET_MOVIE_COMPOSER:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_COMPOSER);
 						action = new GetMovieComposerAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
+						action.performAction();
+						dialog = action.getDialog();
+						break;
+						
+					case Constants.INTENT_GET_MOVIE_RUNTIME:
+						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_RUNTIME);
+						action = new GetMovieRuntimeAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
+						action.performAction();
+						dialog = action.getDialog();
+						break;
+						
+					case Constants.INTENT_GET_MOVIE_RELEASE_DATE:
+						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_RELEASE_DATE);
+						action = new GetMovieReleaseDateAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
 						action.performAction();
 						dialog = action.getDialog();
 						break;
@@ -184,6 +203,10 @@ public class CinemateSpeechlet implements Speechlet {
 		}
 		
 		session.setAttribute(Constants.SESSION_KEY_DIALOG, dialog);
+		
+    /**** VoiceInsights tracking ****/
+    //voiceInsights.track(intent.getName(), intent.getSlots(), dialog.getSpeechletResponse().getOutputSpeech());
+		
 		logger.info("Exited: [dialog: {}]",dialog.toString());
 		return dialog.getSpeechletResponse();
 		

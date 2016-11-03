@@ -16,7 +16,7 @@ public class Constants {
 	public static final String INTENT_GET_MOVIE_PRODUCER = "GetMovieProducer";
 	public static final String INTENT_GET_MOVIE_WRITER = "GetMovieWriter";
 	public static final String INTENT_GET_MOVIE_COMPOSER = "GetMovieComposer";
-	public static final String INTENT_GET_NOW_PLAYING = "GetNowPlaying";
+	public static final String INTENT_GET_MOVIE_RUNTIME= "GetMovieRuntime";
 	public static final String INTENT_GET_UPCOMING = "GetUpcoming";
 	public static final String INTENT_GET_COMMON_MOVIES = "GetCommonMovies";
 	public static final String INTENT_GET_STREAMING_SOURCES = "GetStreamingSources";
@@ -37,8 +37,8 @@ public class Constants {
 	 * Slot Names
 	 */
 	public static final String SLOT_NAME_MOVIE_TITLE = "movieTitle";
-	public static final String SLOT_NAME_ACTOR_1 = "actor1";
-	public static final String SLOT_NAME_ACTOR_2 = "actor2";
+	public static final String SLOT_NAME_ACTOR_1 = "firstActor";
+	public static final String SLOT_NAME_ACTOR_2 = "secondActor";
 	
 	/*
 	 * TMDB URls
@@ -63,6 +63,7 @@ public class Constants {
 	public static final String TMDB_RESPONSE_PLOT = "overview";
 	public static final String TMDB_RESPONSE_POSTER_PATH = "poster_path";
 	public static final String TMDB_RESPONSE_RELEASE_DATE = "release_date";
+	public static final String TMDB_RESPONSE_VOTE_COUNT = "vote_count";
 	public static final String TMDB_RESPONSE_RUNTIME = "runtime";
 	public static final String TMDB_RESPONSE_CREDITS = "credits";
 	public static final String TMDB_RESPONSE_CREDITS_CAST = "cast";
@@ -110,6 +111,11 @@ public class Constants {
 		public static final String SESSION_KEY_ACTION = "action";
 		public static final String SESSION_KEY_DIALOG = "dialog";
 
+	/*
+	 * Card Content Titles
+	 */
+		public static final String CARD_TITLE_WELCOME = "Welcome";
+		public static final String CARD_TITLE_COMMON_MOVIES = "Common Movies";
 
 	
 	/*

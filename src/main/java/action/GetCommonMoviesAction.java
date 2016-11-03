@@ -14,6 +14,7 @@ import dataaccess.tmdb.ActorIdDao;
 import dataaccess.tmdb.CommonMoviesDao;
 import dialog.Dialog;
 import exception.TmdbApiException;
+import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
 import value.Actor;
@@ -41,9 +42,7 @@ public class GetCommonMoviesAction extends Action{
 		for (String userInput : this.userInput){
 			logger.debug("userInput: [{}]", userInput);
 			if (userInput == null || userInput.length()==0){
-				alexaResponse.setInitSentence(Sentences.speakActor);
-				alexaResponse.setRepromptSentence(Sentences.speakActorReprompt);
-				alexaResponse.setIsTell(false);
+				setDialogIsAsk(Sentences.speakActor, Sentences.speakActorReprompt);
 				setActionComplete(true);
 				session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
 
@@ -82,9 +81,7 @@ public class GetCommonMoviesAction extends Action{
 			logger.debug("Created Actor [actorId: {}, actorName: {}]", actorId, actorName);
 			
 		} else if(daoReturnCode == 1){ //no movie was found
-			alexaResponse.setInitSentence(Sentences.cannotFindActor(userInput));
-			alexaResponse.setRepromptSentence(Sentences.cannotFindActorReprompt(userInput));
-			alexaResponse.setIsTell(false);
+			setDialogIsAsk(Sentences.cannotFindActor(userInput), Sentences.cannotFindActorReprompt(userInput));
 			setActionComplete(true);
 			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
 
@@ -134,8 +131,8 @@ public class GetCommonMoviesAction extends Action{
 		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
 		logger.debug("Added actionComplete: {} to session", getActionComplete());		
 
-		//TODO Card Info
-		setDialogIsAsk(Sentences.commonMovies(commonMoviesResponse, actorList), Sentences.commonMoviesReprompt, "", "");
+		setDialogIsAsk(Sentences.commonMovies(commonMoviesResponse, actorList), Sentences.commonMoviesReprompt,
+				Constants.CARD_TITLE_COMMON_MOVIES, CardContent.commonMovies(commonMoviesResponse, actorList));
 	
 		logger.info("Exited");
 

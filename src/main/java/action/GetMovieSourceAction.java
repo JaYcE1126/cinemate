@@ -124,9 +124,7 @@ public class GetMovieSourceAction extends GetMovieAction {
 			actionSuccess();
 			
 		} else if(daoReturnCode == 1)	{
-			alexaResponse.setInitSentence(Sentences.noMovieSources(this.userInput));
-			alexaResponse.setRepromptSentence(Sentences.noMovieSourcesReprompt);
-			alexaResponse.setIsTell(false);
+			setDialogIsAsk(Sentences.noMovieSources(this.userInput), Sentences.noMovieSourcesReprompt);
 			
 		} else {
 			responseData = movieStreamingSource.getData();
@@ -147,11 +145,8 @@ public class GetMovieSourceAction extends GetMovieAction {
 		setActionComplete(true);
 		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
 		logger.debug("Added actionComplete: {} to session", getActionComplete());	
-
-		alexaResponse.setInitSentence(Sentences.movieSources(super.movie));
-		alexaResponse.setRepromptSentence(Sentences.movieSourcesReprompt);
-		alexaResponse.setCardContent("", "", ""); //TODO
-		alexaResponse.setIsTell(false);
+		//TODO set card content
+		setDialogIsAsk(Sentences.movieSources(super.movie), Sentences.movieSourcesReprompt, "", "", "");
 		
 		logger.info("Exited");
 

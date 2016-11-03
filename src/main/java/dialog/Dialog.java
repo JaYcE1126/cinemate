@@ -1,8 +1,5 @@
 package dialog;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.Card;
 import com.amazon.speech.ui.Image;
@@ -12,7 +9,7 @@ import com.amazon.speech.ui.StandardCard;
 
 public class Dialog {
 	
-	private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
+	//private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
 
 	private SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
 	private SsmlOutputSpeech repromptOS = new SsmlOutputSpeech();

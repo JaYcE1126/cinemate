@@ -1,11 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.chalet.cinemate</groupId>
-  <artifactId>cinemate_redesign</artifactId>
+  <artifactId>cinemate</artifactId>
   <version>${version.number}</version>
   <name>Cinemate</name>
   
+  <repositories>
+      <repository>
+          <id>voicelabs</id>
+          <name>analytics-java-sdk</name>
+          <url>http://maven.voicelabs.co</url>
+      </repository>
+  </repositories>
+  
   <dependencies>
+      <dependency>
+        <groupId>co.voicelabs</groupId>
+        <artifactId>voicelabs-java-sdk</artifactId>
+        <version>1.0.1</version>
+        <scope>compile</scope>
+    </dependency>
 		<dependency>
 			<groupId>com.amazon.alexa</groupId>
 			<artifactId>alexa-skills-kit</artifactId>

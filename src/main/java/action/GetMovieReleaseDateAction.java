@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.amazon.speech.speechlet.Session;
 
 import exception.TmdbApiException;
+import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
 import value.Movie;
@@ -25,9 +26,7 @@ public class GetMovieReleaseDateAction extends GetMovieAction{
 			if (super.movie!=null){
 				actionSuccess();
 			}else {
-				alexaResponse.setInitSentence(Sentences.speakMovie);
-				alexaResponse.setRepromptSentence(Sentences.speakMovieReprompt);
-				alexaResponse.setIsTell(false);
+				setDialogIsAsk(Sentences.speakMovie, Sentences.speakMovieReprompt);
 			}
 		} else {
 			setMovieId();
@@ -57,13 +56,8 @@ public class GetMovieReleaseDateAction extends GetMovieAction{
 		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
 		logger.debug("Added actionComplete: {} to session", getActionComplete());		
 
-		//TODO Card Content
-		setDialogIsAsk(Sentences.movieReleaseDate(super.movie),Sentences.movieReleaseDateReprompt, "","", "" );
-		
-		//alexaResponse.setInitSentence(Sentences.movieReleaseDate(super.movie));
-		//alexaResponse.setRepromptSentence(Sentences.movieReleaseDateReprompt);
-		//alexaResponse.setCardContent("", "", ""); //TODO
-		//alexaResponse.setIsTell(false);
+		setDialogIsAsk(Sentences.movieReleaseDate(super.movie), Sentences.movieReleaseDateReprompt, 
+				movie.getTitle(), CardContent.movieReleaseDate(super.movie), movie.getPosterLocation());	
 		
 		logger.info("Exited");
 

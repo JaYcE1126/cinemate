@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.amazon.speech.speechlet.Session;
 
 import exception.TmdbApiException;
+import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
 import value.Movie;
@@ -25,9 +26,7 @@ public class GetMovieWriterAction extends GetMovieAction{
 			if (super.movie!=null){
 				actionSuccess();
 			}else {
-				alexaResponse.setInitSentence(Sentences.speakMovie);
-				alexaResponse.setRepromptSentence(Sentences.speakMovieReprompt);
-				alexaResponse.setIsTell(false);
+				setDialogIsAsk(Sentences.speakMovie, Sentences.speakMovieReprompt);
 			}
 		} else {
 			setMovieId();
@@ -56,12 +55,8 @@ public class GetMovieWriterAction extends GetMovieAction{
 		setActionComplete(true);
 		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
 		logger.debug("Added actionComplete: {} to session", getActionComplete());	
-
-		alexaResponse.setInitSentence(Sentences.movieWriter(super.movie));
-		alexaResponse.setRepromptSentence(Sentences.movieWriterReprompt);
-		alexaResponse.setCardContent("", "", ""); //TODO
-		alexaResponse.setIsTell(false);
-		
+		setDialogIsAsk(Sentences.movieWriter(super.movie), Sentences.movieWriterReprompt, 
+				movie.getTitle(), CardContent.movieWriter(super.movie), movie.getPosterLocation());			
 		logger.info("Exited");
 
 	}

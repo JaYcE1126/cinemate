@@ -21,7 +21,8 @@ public class MovieTest {
 		//fail("Not yet implemented");
 		//testMovie();
 		//testMovie2();
-	
+		
+		
 		Map<String, Slot> slots = new HashMap<String, Slot>();
 	
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
@@ -81,8 +82,9 @@ public class MovieTest {
 			movieTitle = reader.nextLine();
 			
 		}
-		
+
 	}
+
 		
 /*
 		com.amazon.speech.slu.Slot.Builder bSlot1 = Slot.builder();

@@ -68,19 +68,20 @@ public class MovieIdDao implements Dao{
 					
 					JSONObject movieResult = jsonResultsArray.getJSONObject(i);
 					int movieIdResult = movieResult.getInt(Constants.TMDB_RESPONSE_ID);
-					String movieTitleResult = movieResult.getString(Constants.TMDB_RESPONSE_TITLE);
+					String movieTitleResult = movieResult.getString(Constants.TMDB_RESPONSE_TITLE).replace("&", "and");
 					String movieReleaseDateResults = movieResult.getString(Constants.TMDB_RESPONSE_RELEASE_DATE);
+					int movieVoteCount = movieResult.getInt(Constants.TMDB_RESPONSE_VOTE_COUNT);
 										
 					int distance = Utilities.getDistance(this.userInput, movieTitleResult);
 					logger.trace("distance between {} and {}: {}",this.userInput, movieTitleResult, distance);
 					
-					if (distance < lowestDistance) {
+					if (distance < lowestDistance && movieVoteCount > 1) {
 						lowestDistance = distance;
 						movieIdWrapper = new MovieIdWrapper(movieIdResult, movieTitleResult, movieReleaseDateResults);
 						movieIdList = new ArrayList<MovieIdWrapper>();
 						movieIdList.add(movieIdWrapper);
 
-					} else if (distance == lowestDistance){
+					} else if (distance == lowestDistance && movieVoteCount > 1){
 						movieIdWrapper = new MovieIdWrapper(movieIdResult, movieTitleResult, movieReleaseDateResults);
 						movieIdList.add(movieIdWrapper);
 					}
