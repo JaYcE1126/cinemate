@@ -33,6 +33,7 @@ public class GetMovieInfoAction extends GetMovieAction{
 			setMovieId();
 			if (super.movieId == -1) return;
 			setMovieInfo();
+			
 			if (super.movie!=null)
 				actionSuccess();
 		}
@@ -54,8 +55,8 @@ public class GetMovieInfoAction extends GetMovieAction{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 		setDialogIsAsk(Sentences.movieInfo(super.movie), Sentences.movieInfoReprompt, 
 				movie.getTitle(), CardContent.movieInfo(super.movie), movie.getPosterLocation());			
 		logger.info("Exited");

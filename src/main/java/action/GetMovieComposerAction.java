@@ -53,8 +53,8 @@ public class GetMovieComposerAction extends GetMovieAction{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 
 		setDialogIsAsk(Sentences.movieComposer(super.movie), Sentences.movieComposerReprompt, 
 				movie.getTitle(), CardContent.movieComposer(super.movie), movie.getPosterLocation());		

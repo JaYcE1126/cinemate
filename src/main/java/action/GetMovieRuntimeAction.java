@@ -55,8 +55,8 @@ public class GetMovieRuntimeAction extends GetMovieAction{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 
 		//TODO Card Content
 		setDialogIsAsk(Sentences.movieRuntime(super.movie),Sentences.movieRuntimeReprompt, movie.getTitle(),CardContent.movieRuntime(movie), movie.getPosterLocation());

@@ -44,7 +44,8 @@ public class GetCommonMoviesAction extends Action{
 			if (userInput == null || userInput.length()==0){
 				setDialogIsAsk(Sentences.speakActor, Sentences.speakActorReprompt);
 				setActionComplete(true);
-				session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+				//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+				//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 
 				logger.info("Exited");
 				return;
@@ -83,13 +84,17 @@ public class GetCommonMoviesAction extends Action{
 		} else if(daoReturnCode == 1){ //no movie was found
 			setDialogIsAsk(Sentences.cannotFindActor(userInput), Sentences.cannotFindActorReprompt(userInput));
 			setActionComplete(true);
-			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
+
 
 		} else {
 			responseData = actorIdDao.getData();
 			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
 			setActionComplete(true);
-			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//logger.debug("Set actionComplete: [{}]", getActionComplete());		
+
 			throw new TmdbApiException(errorMessage);
 		}		
 		
@@ -119,8 +124,9 @@ public class GetCommonMoviesAction extends Action{
 		}		
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Set actionComplete: [{}]", getActionComplete());		
+
 		logger.info("Exited");
 	}
 	
@@ -128,8 +134,8 @@ public class GetCommonMoviesAction extends Action{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: {} to session", getActionComplete());		
 
 		setDialogIsAsk(Sentences.commonMovies(commonMoviesResponse, actorList), Sentences.commonMoviesReprompt,
 				Constants.CARD_TITLE_COMMON_MOVIES, CardContent.commonMovies(commonMoviesResponse, actorList));

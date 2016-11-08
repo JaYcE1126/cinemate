@@ -29,6 +29,24 @@ public class Sentences {
 		return sentence.toString();
 	}
 	
+	public static final String help = 
+			"<speak>" + 
+			"<s>You can ask Cinemate to provide you with the following information for all kinds of movie information such as:</s>"+
+			"<s>A movie's plot, release date, director, producer, writer, or composer.</s>" +
+			"<s>You can also ask for a list of a movie's cast members or common movies between two actors.</s>" +
+			"<s>I've sent a list of information I can provide to the Alexa app on your phone.</s>" +
+			"<s>Now, go ahead, tell me what more you would like to know?</s>" + 
+			"</speak>";
+	
+	public static final String helpReprompt = 
+			"<speak>" + 
+			"<s>You can ask Cinemate to provide you with the following information for all kinds of movie information such as:</s>"+
+			"<s>A movie's plot, release date, director, producer, writer, or composer.</s>" +
+			"<s>You can also ask for a list of a movie's cast members or common movies between two actors.</s>" +
+			"<s>I've sent a list of information I can provide to the Alexa app on your phone.</s>" +
+			"<s>Now, go ahead, tell me what more you would like to know?</s>" + 
+			"</speak>";
+	
 	public static String confirmMovieInit(int moviesFound, String movieTitle, String releaseDate){
 		logger.debug("Entered: [moviesFound: {}, movieTitle: {}, releaseDate: {}, director: {}]",
 				moviesFound, movieTitle, releaseDate);
@@ -83,21 +101,19 @@ public class Sentences {
 	}
 	
 	
-	public static String confirmMovieNoneSelected(){
-		StringBuilder sentence = new StringBuilder("<speak>");
-		
-		sentence.append("<s>There are no more movies that best match your request.</s> ");
-		sentence.append("<s>Please try your request again and clearly state the movie of interest.</s>");
-		sentence.append("</speak>");
+	public static String confirmMovieNoneSelected = 
+			"<speak><s>There are no more movies that best match your request.</s>" + 
+			"<s>Please try your request again and clearly state the movie of interest.</s></speak>";
+			
+	public static String confirmMovieNoneSelectedReprompt = 
+			"<s>Please try your request again and clearly state the movie of interest.</s></speak>";
 
-		return sentence.toString();
-	}
 	
 	public static String confirmMovieInvalidIntent =
 		"<speak><s>Your response is invalid.</s>";
 	
 	public static String invalidIntent =
-			"<speak><s>Your request is invalid.<s></s> I've sent a list of information I can provide to your Alexa App.</s><s> Now, go ahead and ask me what you would like to know.</s></speak>";
+			"<speak><s>Your request is invalid.</s><s> I've sent a list of information I can provide to your Alexa App.</s><s> Now, go ahead and ask me what you would like to know.</s></speak>";
 
 	public static String invalidIntentReprompt =
 			"<speak><s>Please go ahead and ask me what you would like to know about any movie.</s></speak>";
@@ -232,7 +248,7 @@ public class Sentences {
 			sentence.append(movie.getTitle()); 
 			sentence.append(" was produced by ");
 			sentence.append(movie.getProducers());
-			sentence.append(".</s><s/>What else would you like to know about ");
+			sentence.append(".</s><s>What else would you like to know about ");
 			sentence.append(movie.getTitle());
 			sentence.append(".</s></speak>");
 		} else {
@@ -257,7 +273,7 @@ public class Sentences {
 			sentence.append(movie.getTitle()); 
 			sentence.append(" was written by ");
 			sentence.append(movie.getWriters());
-			sentence.append(".</s><s/>What else would you like to know about ");
+			sentence.append(".</s><s>What else would you like to know about ");
 			sentence.append(movie.getTitle());
 			sentence.append(".</s></speak>");
 		} else {
@@ -283,7 +299,7 @@ public class Sentences {
 			sentence.append(movie.getTitle()); 
 			sentence.append(" was composed by ");
 			sentence.append(movie.getOriginalMusicComposers());
-			sentence.append(".</s><s/>What else would you like to know about ");
+			sentence.append(".</s><s>What else would you like to know about ");
 			sentence.append(movie.getTitle());
 			sentence.append(".</s></speak>");
 		} else {
@@ -308,7 +324,7 @@ public class Sentences {
 		sentence.append(movie.getTitle());
 		sentence.append(" is available for streaming on, ");
 		sentence.append(Utilities.convertListToString(movie.getWebSources()));
-		sentence.append(".</s><s/>What else would you like to know about ");
+		sentence.append(".</s><s>What else would you like to know about ");
 		sentence.append(movie.getTitle());
 		sentence.append(".</s></speak>");
 

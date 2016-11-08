@@ -35,7 +35,7 @@ public class GetMovieCastAction extends GetMovieAction{
 			setMovieInfo();
 			if (super.movie!=null)
 				actionSuccess();
-				session.setAttribute(Constants.SESSION_KEY_ACTION, this);
+				//session.setAttribute(Constants.SESSION_KEY_ACTION, this);
 		}
 		logger.info("Exited");
 	}
@@ -55,7 +55,7 @@ public class GetMovieCastAction extends GetMovieAction{
 		}
 		if (super.movie!=null) {
 			actionSuccess();
-			session.setAttribute(Constants.SESSION_KEY_ACTION, this);
+			//session.setAttribute(Constants.SESSION_KEY_ACTION, this);
 		}
 		logger.info("Exited");
 	}
@@ -64,11 +64,11 @@ public class GetMovieCastAction extends GetMovieAction{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 		
-		session.setAttribute(Constants.SESSION_KEY_ACTION, this);
-		logger.debug("Added action: {} to session", GetMovieCastAction.class);
+		//session.setAttribute(Constants.SESSION_KEY_ACTION, this);
+		//logger.debug("Added action: {} to session", GetMovieCastAction.class);
 
 		setDialogIsAsk(Sentences.movieCast(super.movie, index), Sentences.movieCastReprompt, 
 				movie.getTitle(), CardContent.movieCast(super.movie, index), movie.getPosterLocation());

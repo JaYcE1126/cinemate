@@ -21,6 +21,7 @@ public abstract class Action {
 
 	public void setActionComplete(boolean actionComplete) {
 		this.actionComplete = actionComplete;
+		logger.debug("Set actionComplete: [{}]", getActionComplete());		
 	}
 	
 	public boolean getActionComplete() {

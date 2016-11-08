@@ -53,8 +53,8 @@ public class GetMovieReleaseDateAction extends GetMovieAction{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 
 		setDialogIsAsk(Sentences.movieReleaseDate(super.movie), Sentences.movieReleaseDateReprompt, 
 				movie.getTitle(), CardContent.movieReleaseDate(super.movie), movie.getPosterLocation());	

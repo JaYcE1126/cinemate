@@ -23,7 +23,7 @@ public class MovieTest {
 		//testMovie2();
 		
 		
-		Map<String, Slot> slots = new HashMap<String, Slot>();
+		/*Map<String, Slot> slots = new HashMap<String, Slot>();
 	
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
 		String intent = "";
@@ -86,7 +86,7 @@ public class MovieTest {
 	}
 
 		
-/*
+
 		com.amazon.speech.slu.Slot.Builder bSlot1 = Slot.builder();
 		bSlot1.withName("movie");
 		bSlot1.withValue("teenage mutant ninja turtles");
@@ -206,6 +206,6 @@ public class MovieTest {
 		assertTrue("Not True", title.equals("The Matrix"));
 	}
 	*/
-	
+	}
 	
 }

@@ -54,7 +54,7 @@ public class GetMovieWriterAction extends GetMovieAction{
 		
 		setActionComplete(true);
 		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());	
+		logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 		setDialogIsAsk(Sentences.movieWriter(super.movie), Sentences.movieWriterReprompt, 
 				movie.getTitle(), CardContent.movieWriter(super.movie), movie.getPosterLocation());			
 		logger.info("Exited");

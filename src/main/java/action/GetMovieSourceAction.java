@@ -11,6 +11,7 @@ import com.amazon.speech.speechlet.Session;
 import dataaccess.guidebox.GuideboxIdDao;
 import dataaccess.guidebox.GuideboxStreamingInfoDao;
 import exception.TmdbApiException;
+import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
 import value.Movie;
@@ -132,9 +133,9 @@ public class GetMovieSourceAction extends GetMovieAction {
 			throw new TmdbApiException(errorMessage);
 		}
 		
-		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());
+		//setActionComplete(true);
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: {} to session", getActionComplete());
 		logger.info("Exited");
 
 	}
@@ -143,10 +144,11 @@ public class GetMovieSourceAction extends GetMovieAction {
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());	
-		//TODO set card content
-		setDialogIsAsk(Sentences.movieSources(super.movie), Sentences.movieSourcesReprompt, "", "", "");
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
+		//setDialogIsAsk(Sentences.movieSources(super.movie), Sentences.movieSourcesReprompt, "", "", "");
+			setDialogIsAsk(Sentences.movieSources(super.movie), Sentences.movieSourcesReprompt, movie.getTitle(), CardContent.streamingSources(movie), movie.getPosterLocation());
+
 		
 		logger.info("Exited");
 

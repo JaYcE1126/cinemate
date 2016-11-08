@@ -4,7 +4,7 @@
       "intent": "GetMovieInfo",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
@@ -13,7 +13,7 @@
       "intent": "GetMoviePlot",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
@@ -22,7 +22,7 @@
       "intent": "GetMovieDirector",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
@@ -31,7 +31,7 @@
       "intent": "GetMovieProducer",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
@@ -40,7 +40,7 @@
       "intent": "GetMovieWriter",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
@@ -49,7 +49,7 @@
       "intent": "GetMovieComposer",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
@@ -58,16 +58,25 @@
       "intent": "GetMovieReleaseDate",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
+          "type": "LIST_OF_MOVIES"
+        }
+      ]
+    },
+     {
+      "intent": "GetMovieRuntime",
+      "slots": [
+        {
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
     },
     {
-      "intent": "GetMovieCrew",
+      "intent": "GetMovieCast",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]
@@ -76,7 +85,7 @@
       "intent": "GetStreamingSources",
       "slots": [
         {
-          "name": "movie",
+          "name": "movieTitle",
           "type": "LIST_OF_MOVIES"
         }
       ]

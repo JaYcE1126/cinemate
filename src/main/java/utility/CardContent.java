@@ -23,18 +23,17 @@ public class CardContent {
 			"Where you can stream a movie.";
 			//"A list of movies now playing in theaters.\n";
 	
-	public static final String availableInformation = "You can ask Cinemate to give you any of the follow information:\n" + 
+	public static final String help = "You can ask Cinemate to give you any of the follow information:\n" + 
+			"A movies streaming sources.\n" +
 			"A movies plot.\n" + 
 			"A movies release date.\n" + 
+			"A movies runtime.\n" +
 			"A movies director.\n" +
 			"A movies producer.\n" +
 			"A movies writer.\n" +
 			"A movies music composer.\n" +
 			"A movies cast members.\n" +
-			"Common movies between two actors \n" +
-			"Where you can stream a movie.";
-
-			//"A list of movies now playing in theaters.\n";
+			"Common movies between two actors \n";
 	
 	public static String movieInfo(Movie movie){
 		String cardContent = "";

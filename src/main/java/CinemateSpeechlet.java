@@ -35,12 +35,14 @@ public class CinemateSpeechlet implements Speechlet {
 	
 	private Action action;
 	private Dialog dialog;
+	private boolean actionComplete;
 	
 	public void onSessionStarted(final SessionStartedRequest request, final Session session) throws SpeechletException {
 		logger.info("--START SESSION--: requestId={}, sessionId={}", request.getRequestId(), session.getSessionId());
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, true);
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, true);
 		dialog = new Dialog();
-		
+		actionComplete = true;
+				
     /***** VoiceInsights Initialize *****/
 		voiceInsights = new VoiceInsights(viAppToken, session);
 
@@ -59,25 +61,29 @@ public class CinemateSpeechlet implements Speechlet {
 	}
 
 	public SpeechletResponse onIntent(final IntentRequest request, final Session session) throws SpeechletException {
-
+		final long startTime = System.currentTimeMillis();
 		Intent intent = request.getIntent();
 		String intentName = intent.getName();
 		logger.info("intentName: {}", intentName);
 		HashMap<String, String> userInput = Utilities.retriveSlotValues(intent.getSlots());
 		logger.info("userInput: {}", userInput);
-		
+		logger.debug("Session: {}", session.getAttributes());
+		logger.debug("Session: {}", session);
+
+
 		if (Constants.INTENT_REPEAT.equals(intentName)) {
-			dialog = (Dialog) session.getAttribute(Constants.SESSION_KEY_DIALOG);
+			//dialog = (Dialog) session.getAttribute(Constants.SESSION_KEY_DIALOG);
 			logger.info("Exited: [dialog: {}]",dialog.toString());
 			return dialog.getSpeechletResponse();
 		}
 
-		Boolean actionComplete = (Boolean) session.getAttribute(Constants.SESSION_KEY_ACTION_COMPLETE);
+		//Boolean actionComplete = (Boolean) session.getAttribute(Constants.SESSION_KEY_ACTION_COMPLETE);
+		actionComplete = (action != null) ? action.getActionComplete() : true;
 		logger.debug("actionComplete: {}",actionComplete);
 		
 		try{
 			if (!actionComplete) {
-				action = (Action)session.getAttribute(Constants.SESSION_KEY_ACTION);
+				//action = (Action)session.getAttribute(Constants.SESSION_KEY_ACTION);
 				action.reattempt(intentName);
 				dialog = action.getDialog();
 			} else {
@@ -156,6 +162,13 @@ public class CinemateSpeechlet implements Speechlet {
 						dialog = action.getDialog();
 						break;
 						
+					case Constants.INTENT_HELP:
+						logger.debug("entered case: {}", Constants.INTENT_HELP);
+						dialog.setInitSentence(Sentences.help);
+						dialog.setRepromptSentence(Sentences.helpReprompt);
+						dialog.setCardContent(Constants.CARD_TITLE_HELP, CardContent.help);
+						dialog.setIsTell(false);
+						
 					case Constants.INTENT_CANCEL:
 						logger.debug("entered case: {}", Constants.INTENT_CANCEL);
 						dialog.setInitSentence(Sentences.goodbye);
@@ -193,6 +206,7 @@ public class CinemateSpeechlet implements Speechlet {
 						dialog.setIsTell(false);
 						break;
 				}
+				
 			}
 		}catch(Exception e){
 			logger.error("Exception e = {}",e.getMessage());
@@ -202,12 +216,16 @@ public class CinemateSpeechlet implements Speechlet {
 			dialog.setIsTell(true);
 		}
 		
-		session.setAttribute(Constants.SESSION_KEY_DIALOG, dialog);
+		//session.setAttribute(Constants.SESSION_KEY_DIALOG, dialog);
 		
     /**** VoiceInsights tracking ****/
-    //voiceInsights.track(intent.getName(), intent.getSlots(), dialog.getSpeechletResponse().getOutputSpeech());
+    voiceInsights.track(intent.getName(), intent.getSlots(), dialog.getSpeechletResponse().getOutputSpeech());
 		
-		logger.info("Exited: [dialog: {}]",dialog.toString());
+    logger.info("Set dialog: [{}]",dialog.toString());
+		logger.info("Exited: [Session: {}]",session.getAttributes());
+		
+		final long endTime = System.currentTimeMillis();
+		System.out.println("Total execution time: " + (endTime - startTime)/1000 + " seconds" );
 		return dialog.getSpeechletResponse();
 		
 	}

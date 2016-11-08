@@ -116,6 +116,7 @@ public class Constants {
 	 */
 		public static final String CARD_TITLE_WELCOME = "Welcome";
 		public static final String CARD_TITLE_COMMON_MOVIES = "Common Movies";
+		public static final String CARD_TITLE_HELP = "Help";
 
 	
 	/*

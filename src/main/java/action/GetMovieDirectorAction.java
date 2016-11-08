@@ -53,8 +53,8 @@ public class GetMovieDirectorAction extends GetMovieAction{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: {} to session", getActionComplete());		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 		setDialogIsAsk(Sentences.movieDirector(super.movie), Sentences.movieDirectorReprompt, 
 				movie.getTitle(), CardContent.movieDirector(super.movie), movie.getPosterLocation());	
 		

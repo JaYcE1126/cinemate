@@ -1,5 +1,6 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,19 +24,22 @@ public class GetMovieAction extends Action{
 	private static final Logger logger = LoggerFactory.getLogger(GetMovieAction.class);
 
 	protected String userInput;
-	private List<MovieIdWrapper> movieIdList;
+	protected List<MovieIdWrapper> movieIdList = new ArrayList<MovieIdWrapper>();
 	protected int movieId;
-	private int movieIdIndex;
+	protected int movieIdIndex;
 	protected Movie movie;
+	protected boolean reformatWithDigit = false;
 
 	public GetMovieAction(String userInput, Session session){
 		logger.info("Entered: [userInput: {}]", userInput);
 		setActionComplete(false);
-		this.userInput = Utilities.formatMovieTitle(userInput);
+		this.userInput = userInput;
 		this.session = session;
+		logger.debug("Session: {}", this.session);
 		this.movieId = -1;
 		this.movieIdIndex = 0;
 		this.alexaResponse = new Dialog();
+		if (userInput != null) this.reformatWithDigit = Utilities.doesContainNumber(userInput);
 		logger.info("Exited");
 	}
 
@@ -50,16 +54,15 @@ public class GetMovieAction extends Action{
 			this.movieIdIndex++;
 			
 			if (movieIdIndex >= movieIdList.size()){
-				alexaResponse.setInitSentence(Sentences.confirmMovieNoneSelected());
-				alexaResponse.setIsTell(false);
+				setDialogIsAsk(Sentences.confirmMovieNoneSelected,Sentences.confirmMovieNoneSelectedReprompt);
+				
 			} else {
 			
 				MovieIdWrapper miw = movieIdList.get(movieIdIndex);
 				boolean isLastResult = (movieIdIndex==movieIdList.size()-1);
 				
-				alexaResponse.setInitSentence(Sentences.confirmMovieNextMovie(isLastResult, miw.getMovieTitle(), miw.getMovieReleaseDate()));
-				alexaResponse.setRepromptSentence(Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
-				alexaResponse.setIsTell(false);
+				setDialogIsAsk(Sentences.confirmMovieNextMovie(isLastResult, miw.getMovieTitle(), miw.getMovieReleaseDate()),
+					Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
 			}
 		} else if (Constants.INTENT_YES.equals(intentName)){
 			this.movieId = movieIdList.get(movieIdIndex).getMovieId();
@@ -68,21 +71,23 @@ public class GetMovieAction extends Action{
 			
 		} else if (Constants.INTENT_TRY_AGAIN.equals(intentName)){
 			setActionComplete(true);
-			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
+
 			setDialogIsAsk(Sentences.tryAgain, Sentences.tryAgainReprompt);
 		} else if (Constants.INTENT_CUSTOM_STOP.equals(intentName) || Constants.INTENT_CANCEL.equals(intentName)
 				|| Constants.INTENT_STOP.equals(intentName)) {
 			setActionComplete(true);
-			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
+
 			setDialogIsAsk(Sentences.stopAction, Sentences.stopActionReprompt);
 		}else {
 			
 			MovieIdWrapper miw = movieIdList.get(movieIdIndex);
 			String initSentence = Sentences.confirmMovieInvalidIntent + Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate());
-			
-			alexaResponse.setInitSentence(initSentence);
-			alexaResponse.setRepromptSentence(Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
-			alexaResponse.setIsTell(false);
+			setDialogIsAsk(initSentence, Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
+
 		}
 		logger.info("Exited");
 	}
@@ -95,33 +100,67 @@ public class GetMovieAction extends Action{
 		MovieIdDao movieIdDao = new MovieIdDao(userInput);
 		daoReturnCode = movieIdDao.execute();
 		
-		if (daoReturnCode == 0) { //a single move match was found
+/*		if (daoReturnCode == 0) { //a single move match was found
 			responseData = movieIdDao.getData();
-			movieIdList = (responseData.get(Constants.TMDB_RESPONSE_ID) instanceof List<?>) ? (List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID) : null;
+			//movieIdList = (responseData.get(Constants.TMDB_RESPONSE_ID) instanceof List<?>) ? (List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID) : null;
+			movieIdList.addAll((List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID));
 
-			MovieIdWrapper movieIdWrapper = movieIdList.get(0);
-			movieId = movieIdWrapper.getMovieId();
+			//MovieIdWrapper miw = movieIdList.get(0);
 			
-		} else if(daoReturnCode == 1){ //no movie was found
-			alexaResponse.setInitSentence(Sentences.cannotFindMovie(userInput));
-			alexaResponse.setIsTell(true);
+			//movieId = miw.getMovieId();
+			
+//		} else if(daoReturnCode == 1){ //no movie was found
+//			setDialogIsTell(Sentences.cannotFindMovie(this.userInput));
+//			logger.info("Exited");
+//			return;
 			
 		} else if(daoReturnCode == 2){ //more than one movie best matched the userInput
 			responseData = movieIdDao.getData();
-			movieIdList = (responseData.get(Constants.TMDB_RESPONSE_ID) instanceof List<?>) ? (List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID) : null;
-			MovieIdWrapper miw = movieIdList.get(0);
-			
-			session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-			session.setAttribute(Constants.SESSION_KEY_ACTION, this);
+			//movieIdList = (responseData.get(Constants.TMDB_RESPONSE_ID) instanceof List<?>) ? (List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID) : null;
+			movieIdList.addAll((List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID));
 
-			alexaResponse.setInitSentence(Sentences.confirmMovieInit(movieIdList.size(), miw.getMovieTitle(), miw.getMovieReleaseDate()));
-			alexaResponse.setRepromptSentence(Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
-			alexaResponse.setIsTell(false);
-		} else {
+			//MovieIdWrapper miw = movieIdList.get(0);
+			
+			//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+			//session.setAttribute(Constants.SESSION_KEY_ACTION, this);
+			
+			//setDialogIsAsk(Sentences.confirmMovieInit(movieIdList.size(), miw.getMovieTitle(), miw.getMovieReleaseDate()),
+			//		Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
+			
+		}
+*/ 	
+		if (daoReturnCode == -1){
 			responseData = movieIdDao.getData();
 			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
 			throw new TmdbApiException(errorMessage);
+		} else {
+			responseData = movieIdDao.getData();
+			movieIdList.addAll((List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID));
 		}
+		
+		if (reformatWithDigit) {
+			reformatWithDigit = false;
+			this.userInput = Utilities.reformatTitle(this.userInput);
+			this.setMovieId();
+		} else{
+			
+			if (movieIdList.size() > 1) {
+				MovieIdWrapper miw = movieIdList.get(0);
+				//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+				//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
+
+				//session.setAttribute(Constants.SESSION_KEY_ACTION, this);
+				
+				setDialogIsAsk(Sentences.confirmMovieInit(movieIdList.size(), miw.getMovieTitle(), miw.getMovieReleaseDate()),
+						Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
+			} else if (movieIdList.size() == 1) {
+				MovieIdWrapper miw = movieIdList.get(0);
+				movieId = miw.getMovieId();
+			} else {
+				setDialogIsTell(Sentences.cannotFindMovie(this.userInput));
+			}
+		}
+		
 		logger.info("Exited");
 	}
 	
@@ -138,13 +177,16 @@ public class GetMovieAction extends Action{
 				responseData = movieInfoDao.getData();
 				movie = new Movie(responseData);
 				session.setAttribute(Constants.SESSION_KEY_MOVIE, movie);
-				
+				logger.debug("Added movie [{}] to session.", movie.getTitle());
+				logger.debug("Session Attributes: {}", session.getAttributes());
+				logger.debug("Session: {}", session);
+
+
 				//setSuccessDialog();
 				
 			} else if(daoReturnCode == 1)	{
-				alexaResponse.setInitSentence(Sentences.cannotFindMovie(this.userInput));
-				alexaResponse.setIsTell(true);
-				
+				setDialogIsTell(Sentences.cannotFindMovie(this.userInput));
+
 				responseData = movieInfoDao.getData();
 				String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
 				throw new TmdbApiException(errorMessage);
@@ -166,7 +208,7 @@ public class GetMovieAction extends Action{
 		logger.info("Entered");
 		alexaResponse.setInitSentence(Sentences.movieInfo(movie));
 		alexaResponse.setRepromptSentence(Sentences.movieInfoReprompt);
-		alexaResponse.setCardContent("", "", ""); //TODO
+		alexaResponse.setCardContent("", "", ""); 
 		alexaResponse.setIsTell(false);
 		logger.info("Exited");
 
