@@ -400,6 +400,32 @@ GetStreamingSources how can I find {movieTitle}
 GetStreamingSources watch {movieTitle}
 GetStreamingSources stream {movieTitle}
 GetStreamingSources find {movieTitle}
+GetStreamingSources where can I watch it
+GetStreamingSources where can I stream this movie
+GetStreamingSources where can I find it
+GetStreamingSources how can I watch this movie
+GetStreamingSources how can I stream it
+GetStreamingSources how can I find this movie
+GetStreamingSources watch it
+GetStreamingSources stream this movie
+GetStreamingSources find it
+GetMovieRuntime how long is {movieTitle}
+GetMovieRuntime how long is it
+GetMovieRuntime what is the run time for {movieTitle}
+GetMovieRuntime what is the running time for {movieTitle}
+GetMovieRuntime what is the run time for it
+GetMovieRuntime what is the running time for it
+GetMovieRuntime get me the run time for {movieTitle}
+GetMovieRuntime tell me the run time for {movieTitle}
+GetMovieRuntime tell me how long {movieTitle} is
+GetMovieRuntime tell me how long the movie {movieTitle} is
+GetMovieRuntime give me the run time for {movieTitle}
+GetMovieRuntime give me the running time for {movieTitle}
+GetMovieRuntime get me the run time for it
+GetMovieRuntime tell me the run time for it
+GetMovieRuntime tell me how long it is
+GetMovieRuntime give me the run time for it
+GetMovieRuntime give me the running time for it
 Yes yes
 Yes yes please
 Yes sure

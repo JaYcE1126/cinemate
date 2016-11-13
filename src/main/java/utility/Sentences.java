@@ -23,11 +23,14 @@ public class Sentences {
 		sentence.append("<s>I cannot find any information on ");
 		sentence.append(movieTitle);
 		sentence.append("</s>");
-		sentence.append("<s>Please try again later or select a different movie for your request.</s>");
+		sentence.append("<s>Please try again and select a different movie for your request.</s>");
 		sentence.append("</speak>");
 
 		return sentence.toString();
 	}
+	
+	public static final String cannotFindMovieReprompt = 			
+			"<speak><s>Please try again and select a different movie for your request.</s></speak>";
 	
 	public static final String help = 
 			"<speak>" + 
@@ -516,7 +519,7 @@ public class Sentences {
 	public static final String stopAction =
 			"<speak>" + 
 			"<s>Your request has been cancelled.</s>" +
-			"<s>PLease tell what else you would like to know.</s>" +
+			"<s>Please tell what else you would like to know.</s>" +
 			"</speak>";
 	
 	public static final String stopActionReprompt =
@@ -535,7 +538,7 @@ public class Sentences {
 	public static final String welcome = 
 			"<speak>" +
 			"<s>Welcome to Cinemate.</s>" + 
-			"<s>I can now tell you where your reqested movie is available for streaming.</s>" +
+			"<s>I can now tell you where your requested movie is available for streaming.</s>" +
 			"<s>I can also give you a vast amount of movie information including plots, release dates, cast and crew members and common movies betweeen two actors.</s>" +
 			"<s>Please tell me what you want to know?</s>" +
 			"</speak>";

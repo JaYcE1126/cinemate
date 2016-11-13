@@ -6,18 +6,17 @@ import org.slf4j.LoggerFactory;
 import com.amazon.speech.speechlet.Session;
 
 import dialog.Dialog;
-import exception.TmdbApiException;
+import exception.CinemateException;
 import utility.Sentences;
 
 public abstract class Action {
 
-	protected Session session;
 	protected Dialog alexaResponse;
 	private boolean actionComplete;
 	private static final Logger logger = LoggerFactory.getLogger(Sentences.class);
 	
-	public abstract void performAction() throws TmdbApiException;
-	public abstract void reattempt(String intentName) throws TmdbApiException;
+	public abstract void performAction(Session session) throws CinemateException;
+	public abstract void reattempt(String intentName, Session session) throws CinemateException;
 
 	public void setActionComplete(boolean actionComplete) {
 		this.actionComplete = actionComplete;

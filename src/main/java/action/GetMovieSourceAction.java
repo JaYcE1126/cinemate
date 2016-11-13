@@ -7,10 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.amazon.speech.speechlet.Session;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dataaccess.guidebox.GuideboxIdDao;
 import dataaccess.guidebox.GuideboxStreamingInfoDao;
-import exception.TmdbApiException;
+import exception.CinemateException;
 import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
@@ -21,44 +22,47 @@ public class GetMovieSourceAction extends GetMovieAction {
 
 	private int gbMovieId;
 	
-	public GetMovieSourceAction(String userInput, Session session){
-		super(userInput, session);
+	public GetMovieSourceAction(String userInput){
+		super(userInput);
 		this.gbMovieId = -1;
 	}
 	
-	public void performAction() throws TmdbApiException{
+	public void performAction(Session session) throws CinemateException{
 		logger.info("Entered");
-				
+		this.session = session;
+
 		if (super.userInput==null || super.userInput.length()==0) {
-			super.movie = (Movie) session.getAttribute(Constants.SESSION_KEY_MOVIE);
-			if (super.movie!=null){
+			ObjectMapper mapper = new ObjectMapper();
+			super.movie = mapper.convertValue(session.getAttribute(Constants.SESSION_KEY_MOVIE), Movie.class);
+			logger.debug("Retrieved movie from session as [{}]", movie);
+			setActionComplete(true);
+			if (super.movie!=null) {
+				this.movieId = Integer.parseInt(movie.getId());
+				setGbMovieId();
 				
-				if(movie.getWebSources().size() > 0){
-					actionSuccess();
-				} else {
-					setDialogIsAsk(Sentences.noMovieSources(movie.getTitle()), Sentences.noMovieSourcesReprompt);
-				}
-			}else {
+			} else {
 				setDialogIsAsk(Sentences.speakMovie, Sentences.speakMovieReprompt);
 			}
+
 		} else {
 			setMovieId();
 			if (movieId != -1) {
 				setMovieInfo();
 				setGbMovieId();
 			}
-			if (gbMovieId != -1) setGbMovieInfo();
-			
-			if (alexaResponse.getInitSentence().getSsml().length()<1)
-				actionSuccess();
 		}
+		
+		if (gbMovieId != -1) setGbMovieInfo();
+		
+		if (alexaResponse.getInitSentence().getSsml().length()<1)
+			actionSuccess();
 		logger.info("Exited");
 	}
 	
-	public void reattempt(String intentName) throws TmdbApiException{
+	public void reattempt(String intentName, Session session) throws CinemateException{
 		logger.info("Entered: [intentName: {}]", intentName);
 
-		super.reattempt(intentName);
+		super.reattempt(intentName, session);
 		if (movieId != -1) {
 			setMovieInfo();
 			setGbMovieId();
@@ -72,7 +76,7 @@ public class GetMovieSourceAction extends GetMovieAction {
 		logger.info("Exited");
 	}
 	
-	protected void setGbMovieId() throws TmdbApiException{
+	protected void setGbMovieId() throws CinemateException{
 		logger.info("Entered");
 		
 		logger.debug("this.movieId: {}", this.movieId);
@@ -88,20 +92,20 @@ public class GetMovieSourceAction extends GetMovieAction {
 				gbMovieId = (int) responseData.get(Constants.GB_RESPONSE_MOVIE_ID);
 				logger.debug("gbMovieId: {}",gbMovieId);
 			} else if(daoReturnCode == 1){ //no movie was found
-				//gbMovieId = 0;//Indicates to setMovieInfo() that an attempt was made but no movie was found in guidebox.
-				setDialogIsAsk(Sentences.noMovieSources(userInput), Sentences.noMovieSourcesReprompt);
+				setActionComplete(true);
+				setDialogIsAsk(Sentences.noMovieSources(movie.getTitle()), Sentences.noMovieSourcesReprompt);
 				
 			} else {
 				responseData = guideboxIdDao.getData();
 				String errorMessage = (responseData.get(Constants.GB_RESPONSE_ERROR) instanceof String) ? (String) responseData.get(Constants.GB_RESPONSE_ERROR) : null;
-				throw new TmdbApiException(errorMessage);
+				throw new CinemateException("GB: " + errorMessage);
 			}
 		} 
 		logger.info("Exited: [movieId: {}]", this.movieId);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void setGbMovieInfo() throws TmdbApiException{
+	protected void setGbMovieInfo() throws CinemateException{
 		logger.debug("Entered");
 
 		//logger.debug("gbMovieId: [{}]", gbMovieId);
@@ -125,12 +129,12 @@ public class GetMovieSourceAction extends GetMovieAction {
 			actionSuccess();
 			
 		} else if(daoReturnCode == 1)	{
-			setDialogIsAsk(Sentences.noMovieSources(this.userInput), Sentences.noMovieSourcesReprompt);
+			setDialogIsAsk(Sentences.noMovieSources(movie.getTitle()), Sentences.noMovieSourcesReprompt);
 			
 		} else {
 			responseData = movieStreamingSource.getData();
 			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
-			throw new TmdbApiException(errorMessage);
+			throw new CinemateException("GB: " + errorMessage);
 		}
 		
 		//setActionComplete(true);

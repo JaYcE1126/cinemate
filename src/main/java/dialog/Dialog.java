@@ -14,7 +14,6 @@ public class Dialog {
 	private SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
 	private SsmlOutputSpeech repromptOS = new SsmlOutputSpeech();
 	private Reprompt reprompt = new Reprompt();
-
 	private StandardCard card = new StandardCard();
 	private boolean isTell;
 	
@@ -62,10 +61,19 @@ public class Dialog {
 	}
 
 	public SpeechletResponse getSpeechletResponse(){
+		
 		if (isTell){
-			return SpeechletResponse.newTellResponse(outputSpeech, card);
+			if (this.card.getTitle()==null){
+				return SpeechletResponse.newTellResponse(outputSpeech);
+			} else {
+				return SpeechletResponse.newTellResponse(outputSpeech, card);
+			}
+		} 
+		if (this.card.getTitle()==null){
+			return SpeechletResponse.newAskResponse(outputSpeech, reprompt);
+		} else {
+			return SpeechletResponse.newAskResponse(outputSpeech, reprompt, card);
 		}
-		return SpeechletResponse.newAskResponse(outputSpeech, reprompt, card);
 	}
 	
 	public String toString(){

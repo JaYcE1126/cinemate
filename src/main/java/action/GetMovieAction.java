@@ -13,7 +13,6 @@ import dataaccess.tmdb.MovieIdDao;
 import dataaccess.tmdb.MovieInfoDao;
 import dialog.Dialog;
 import exception.CinemateException;
-import exception.TmdbApiException;
 import utility.Constants;
 import utility.Sentences;
 import utility.Utilities;
@@ -29,13 +28,12 @@ public class GetMovieAction extends Action{
 	protected int movieIdIndex;
 	protected Movie movie;
 	protected boolean reformatWithDigit = false;
+	protected Session session;
 
-	public GetMovieAction(String userInput, Session session){
+	public GetMovieAction(String userInput){
 		logger.info("Entered: [userInput: {}]", userInput);
 		setActionComplete(false);
 		this.userInput = userInput;
-		this.session = session;
-		logger.debug("Session: {}", this.session);
 		this.movieId = -1;
 		this.movieIdIndex = 0;
 		this.alexaResponse = new Dialog();
@@ -43,13 +41,14 @@ public class GetMovieAction extends Action{
 		logger.info("Exited");
 	}
 
-	public void performAction() throws TmdbApiException{
+	public void performAction(Session session) throws CinemateException{
 		//created because it's required.  This is not used.
 	}
 	
-	public void reattempt(String intentName) throws TmdbApiException{
-		logger.info("Entered: [intentName: {}]", intentName);
-		
+	public void reattempt(String intentName, Session session) throws CinemateException{
+		logger.info("Entered: [intentName: {}, session: {}]", intentName, session);
+		this.session = session;
+
 		if (Constants.INTENT_NO.equals(intentName)){
 			this.movieIdIndex++;
 			
@@ -84,6 +83,8 @@ public class GetMovieAction extends Action{
 			setDialogIsAsk(Sentences.stopAction, Sentences.stopActionReprompt);
 		}else {
 			
+			logger.debug("movieIdList: [{}]", movieIdList);
+			logger.debug("movieIdIndex: [{}]", movieIdIndex);
 			MovieIdWrapper miw = movieIdList.get(movieIdIndex);
 			String initSentence = Sentences.confirmMovieInvalidIntent + Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate());
 			setDialogIsAsk(initSentence, Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
@@ -93,7 +94,7 @@ public class GetMovieAction extends Action{
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void setMovieId() throws TmdbApiException{
+	protected void setMovieId() throws CinemateException{
 		logger.info("Entered");
 		int daoReturnCode;
 		HashMap<String, Object> responseData;
@@ -132,8 +133,8 @@ public class GetMovieAction extends Action{
 		if (daoReturnCode == -1){
 			responseData = movieIdDao.getData();
 			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
-			throw new TmdbApiException(errorMessage);
-		} else {
+			throw new CinemateException("TMDB: " + errorMessage);
+		} else if (daoReturnCode == 0 || daoReturnCode == 2) {
 			responseData = movieIdDao.getData();
 			movieIdList.addAll((List<MovieIdWrapper>) responseData.get(Constants.TMDB_RESPONSE_ID));
 		}
@@ -157,14 +158,15 @@ public class GetMovieAction extends Action{
 				MovieIdWrapper miw = movieIdList.get(0);
 				movieId = miw.getMovieId();
 			} else {
-				setDialogIsTell(Sentences.cannotFindMovie(this.userInput));
+				setActionComplete(true);
+				setDialogIsAsk(Sentences.cannotFindMovie(this.userInput), Sentences.cannotFindMovieReprompt);
 			}
 		}
 		
 		logger.info("Exited");
 	}
 	
-	protected void setMovieInfo() throws TmdbApiException{
+	protected void setMovieInfo() throws CinemateException{
 		logger.debug("Entered");
 		int daoReturnCode;
 		HashMap<String, Object> responseData;
@@ -172,34 +174,26 @@ public class GetMovieAction extends Action{
 		
 		daoReturnCode = movieInfoDao.execute();
 		
-		try{
-			if (daoReturnCode == 0) {
-				responseData = movieInfoDao.getData();
-				movie = new Movie(responseData);
-				session.setAttribute(Constants.SESSION_KEY_MOVIE, movie);
-				logger.debug("Added movie [{}] to session.", movie.getTitle());
-				logger.debug("Session Attributes: {}", session.getAttributes());
-				logger.debug("Session: {}", session);
-
-
-				//setSuccessDialog();
-				
-			} else if(daoReturnCode == 1)	{
-				setDialogIsTell(Sentences.cannotFindMovie(this.userInput));
-
-				responseData = movieInfoDao.getData();
-				String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
-				throw new TmdbApiException(errorMessage);
-			}
+		if (daoReturnCode == 0) {
+			responseData = movieInfoDao.getData();
+			movie = new Movie(responseData);
 			
-		}catch (CinemateException ce){
-			logger.error("CinemateException ce = {}", ce.getMessage());
-			logger.error("StackTrace = ",ce);
+			this.session.setAttribute(Constants.SESSION_KEY_MOVIE, movie);
+			logger.debug("Added movie [{}] to session.", movie.getTitle());
 			
-			alexaResponse.setInitSentence("Init Sentence");
-			alexaResponse.setIsTell(true);
+			logger.debug("Object Type: [{}]", session.getAttribute(Constants.SESSION_KEY_MOVIE).getClass().getName());
+			logger.debug("Instance of Movie: [{}]", session.getAttribute(Constants.SESSION_KEY_MOVIE) instanceof Movie);
+
+			//setSuccessDialog();
+			
+		} else if(daoReturnCode == 1)	{
+			setDialogIsTell(Sentences.cannotFindMovie(this.userInput));
+
+			responseData = movieInfoDao.getData();
+			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
+			throw new CinemateException("TMDB: " + errorMessage);
 		}
-
+			
 		logger.info("Exited");
 	
 	}

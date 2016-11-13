@@ -67,8 +67,6 @@ public class CinemateSpeechlet implements Speechlet {
 		logger.info("intentName: {}", intentName);
 		HashMap<String, String> userInput = Utilities.retriveSlotValues(intent.getSlots());
 		logger.info("userInput: {}", userInput);
-		logger.debug("Session: {}", session.getAttributes());
-		logger.debug("Session: {}", session);
 
 
 		if (Constants.INTENT_REPEAT.equals(intentName)) {
@@ -84,71 +82,78 @@ public class CinemateSpeechlet implements Speechlet {
 		try{
 			if (!actionComplete) {
 				//action = (Action)session.getAttribute(Constants.SESSION_KEY_ACTION);
-				action.reattempt(intentName);
+				action.reattempt(intentName, session);
 				dialog = action.getDialog();
 			} else {
 				
 				switch (intentName){
 					case Constants.INTENT_GET_MOVIE_INFO:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_INFO);
-						action = new GetMovieInfoAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieInfoAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
+						dialog = action.getDialog();
+						break;
+						
+					case Constants.INTENT_GET_MOVIE_PLOT:
+						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_PLOT);
+						action = new GetMoviePlotAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
 					case Constants.INTENT_GET_MOVIE_DIRECTOR:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_DIRECTOR);
-						action = new GetMovieDirectorAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieDirectorAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
 					case Constants.INTENT_GET_MOVIE_PRODUCER:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_PRODUCER);
-						action = new GetMovieProducerAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieProducerAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();	
 						break;
 						
 					case Constants.INTENT_GET_MOVIE_WRITER:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_WRITER);
-						action = new GetMovieWriterAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieWriterAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
 					case Constants.INTENT_GET_MOVIE_COMPOSER:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_COMPOSER);
-						action = new GetMovieComposerAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieComposerAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
 					case Constants.INTENT_GET_MOVIE_RUNTIME:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_RUNTIME);
-						action = new GetMovieRuntimeAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieRuntimeAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
 					case Constants.INTENT_GET_MOVIE_RELEASE_DATE:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_RELEASE_DATE);
-						action = new GetMovieReleaseDateAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieReleaseDateAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
 					case Constants.INTENT_GET_STREAMING_SOURCES:
 						logger.debug("entered case: {}", Constants.INTENT_GET_STREAMING_SOURCES);
-						action = new GetMovieSourceAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieSourceAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
 					case Constants.INTENT_GET_MOVIE_CAST:
 						logger.debug("entered case: {}", Constants.INTENT_GET_MOVIE_CAST);
-						action = new GetMovieCastAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE), session);
-						action.performAction();
+						action = new GetMovieCastAction(userInput.get(Constants.SLOT_NAME_MOVIE_TITLE));
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
@@ -157,8 +162,8 @@ public class CinemateSpeechlet implements Speechlet {
 						List<String> userInputActors = new ArrayList<String>();
 						userInputActors.add(userInput.get(Constants.SLOT_NAME_ACTOR_1));
 						userInputActors.add(userInput.get(Constants.SLOT_NAME_ACTOR_2));
-						action = new GetCommonMoviesAction(userInputActors, session);
-						action.performAction();
+						action = new GetCommonMoviesAction(userInputActors);
+						action.performAction(session);
 						dialog = action.getDialog();
 						break;
 						
@@ -168,6 +173,7 @@ public class CinemateSpeechlet implements Speechlet {
 						dialog.setRepromptSentence(Sentences.helpReprompt);
 						dialog.setCardContent(Constants.CARD_TITLE_HELP, CardContent.help);
 						dialog.setIsTell(false);
+						break;
 						
 					case Constants.INTENT_CANCEL:
 						logger.debug("entered case: {}", Constants.INTENT_CANCEL);
@@ -189,11 +195,10 @@ public class CinemateSpeechlet implements Speechlet {
 						
 					case Constants.INTENT_KEEP_GOING://This case needs to always be before the Default
 						logger.debug("entered case: {}", Constants.INTENT_KEEP_GOING);
-						Action previousAction = (Action)session.getAttribute(Constants.SESSION_KEY_ACTION);
-						if (previousAction != null){
-							String previousActionName = previousAction.getClass().getSimpleName();
+						if (action != null){
+							String previousActionName = action.getClass().getSimpleName();
 							if (Constants.ACTION_GET_MOVIE_CAST.equals(previousActionName)){
-								previousAction.reattempt(intentName);
+								action.reattempt(intentName, session);
 								break;
 							} 
 						}
@@ -202,7 +207,7 @@ public class CinemateSpeechlet implements Speechlet {
 						logger.debug("entered case: Default");
 						dialog.setInitSentence(Sentences.invalidIntent);
 						dialog.setRepromptSentence(Sentences.invalidIntentReprompt);
-						dialog.setCardContent("", "");
+						//dialog.setCardContent("", "");
 						dialog.setIsTell(false);
 						break;
 				}

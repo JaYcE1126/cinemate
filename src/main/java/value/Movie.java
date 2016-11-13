@@ -29,6 +29,11 @@ public class Movie {
 	private List<String> castRoles = new ArrayList<String>();
 	private List<String> webSources = new ArrayList<String>();
 	
+    //Introducing the default constructor
+    public Movie() {
+    }
+
+	
 	public Movie(String movieId, String movieTitle) throws CinemateException{
 		if (movieTitle.length() ==0 || movieTitle == null) throw new CinemateException(Constants.CINEMATE_EXCEPTION_NO_TITLE);
 		this.id = movieId;

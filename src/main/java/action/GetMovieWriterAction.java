@@ -4,8 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.amazon.speech.speechlet.Session;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import exception.TmdbApiException;
+import exception.CinemateException;
 import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
@@ -14,23 +15,30 @@ import value.Movie;
 public class GetMovieWriterAction extends GetMovieAction{
 	private static final Logger logger = LoggerFactory.getLogger(GetMovieWriterAction.class);
 
-	public GetMovieWriterAction(String userInput, Session session){
-		super(userInput, session);
+	public GetMovieWriterAction(String userInput){
+		super(userInput);
 	}
 	
-	public void performAction() throws TmdbApiException{
+	public void performAction(Session session) throws CinemateException{
 		logger.info("Entered");
-				
+		this.session = session;
+
 		if (super.userInput==null || super.userInput.length()==0) {
-			super.movie = (Movie) session.getAttribute(Constants.SESSION_KEY_MOVIE);
+			ObjectMapper mapper = new ObjectMapper();
+			super.movie = mapper.convertValue(session.getAttribute(Constants.SESSION_KEY_MOVIE), Movie.class);
+			logger.debug("Retrieved movie from session as [{}]", movie);
 			if (super.movie!=null){
 				actionSuccess();
 			}else {
+				setActionComplete(true);
 				setDialogIsAsk(Sentences.speakMovie, Sentences.speakMovieReprompt);
 			}
 		} else {
 			setMovieId();
-			if (super.movieId == -1) return;
+			if (super.movieId == -1) {
+				logger.info("Exited");
+				return;
+			}
 			setMovieInfo();
 			if (super.movie!=null)
 				actionSuccess();
@@ -38,10 +46,10 @@ public class GetMovieWriterAction extends GetMovieAction{
 		logger.info("Exited");
 	}
 	
-	public void reattempt(String intentName) throws TmdbApiException{
+	public void reattempt(String intentName, Session session) throws CinemateException{
 		logger.info("Entered: [intentName: {}]", intentName);
 
-		super.reattempt(intentName);
+		super.reattempt(intentName, session);
 		setMovieInfo();
 		if (super.movie!=null)
 			actionSuccess();
@@ -53,8 +61,8 @@ public class GetMovieWriterAction extends GetMovieAction{
 		logger.info("Entered");
 		
 		setActionComplete(true);
-		session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
-		logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
+		//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
+		//logger.debug("Added actionComplete: [{}] to session", getActionComplete());		
 		setDialogIsAsk(Sentences.movieWriter(super.movie), Sentences.movieWriterReprompt, 
 				movie.getTitle(), CardContent.movieWriter(super.movie), movie.getPosterLocation());			
 		logger.info("Exited");

@@ -1,4 +1,6 @@
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,9 +27,9 @@ import utility.Constants;
 
 public class CinemateTest {
 
-	@Test
+	//@Test
 	public void test() throws SpeechletException, IOException  {
-/*
+
 		Map<String, Slot> slots = new HashMap<String, Slot>();
 	
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
@@ -65,7 +67,9 @@ public class CinemateTest {
 		while(!intent.equals("exit")){
 			System.out.print("Enter a intent: ");
 			intent = reader.nextLine(); 
-			if (Constants.INTENT_GET_COMMON_MOVIES.equals(intent)){
+			if (intent.equals("exit")) {
+				break;
+			} else if (Constants.INTENT_GET_COMMON_MOVIES.equals(intent)){
 				System.out.print("Enter a Actor 1: ");
 				firstActor = reader.nextLine();
 				System.out.print("Enter a Actor 2: ");
@@ -131,7 +135,7 @@ public class CinemateTest {
 			
 		}
 		reader.close();
-*/
+		
 	}
 	
 	

@@ -13,7 +13,7 @@ import dataaccess.Dao;
 import dataaccess.tmdb.ActorIdDao;
 import dataaccess.tmdb.CommonMoviesDao;
 import dialog.Dialog;
-import exception.TmdbApiException;
+import exception.CinemateException;
 import utility.CardContent;
 import utility.Constants;
 import utility.Sentences;
@@ -27,18 +27,17 @@ public class GetCommonMoviesAction extends Action{
 	private List<String> commonMoviesResponse;
 
 	
-	public GetCommonMoviesAction(List<String> userInput, Session session){
+	public GetCommonMoviesAction(List<String> userInput){
 		logger.info("Entered: [userInput: {}]", userInput);
 		setActionComplete(false);
 		this.userInput = userInput;
-		this.session = session;
 		this.alexaResponse = new Dialog();
 		logger.info("Exited");
 	}
 	
-	public void performAction() throws TmdbApiException{
+	public void performAction(Session session) throws CinemateException{
 		logger.info("Entered");
-		
+
 		for (String userInput : this.userInput){
 			logger.debug("userInput: [{}]", userInput);
 			if (userInput == null || userInput.length()==0){
@@ -62,11 +61,11 @@ public class GetCommonMoviesAction extends Action{
 		logger.info("Exited");
 	}
 	
-	public void reattempt(String intentName) throws TmdbApiException{
+	public void reattempt(String intentName, Session session) throws CinemateException {
 		//no reattempt for this action.
 	}
 	
-	private void setActor(String userInput) throws TmdbApiException{
+	private void setActor(String userInput) throws CinemateException{
 		logger.info("Entered: [userInput: {}]",userInput);
 		
 		Dao actorIdDao = new ActorIdDao(userInput);
@@ -95,14 +94,14 @@ public class GetCommonMoviesAction extends Action{
 			//session.setAttribute(Constants.SESSION_KEY_ACTION_COMPLETE, getActionComplete());
 			//logger.debug("Set actionComplete: [{}]", getActionComplete());		
 
-			throw new TmdbApiException(errorMessage);
+			throw new CinemateException("TMDB: " + errorMessage);
 		}		
 		
 		logger.info("Exited");
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void setCommonMoviesList() throws TmdbApiException{
+	private void setCommonMoviesList() throws CinemateException{
 		logger.info("Entered: actorList: {}",actorList);
 		
 		Dao commonMoviesDao = new CommonMoviesDao(actorList);
@@ -120,7 +119,7 @@ public class GetCommonMoviesAction extends Action{
 		} else {
 			responseData = commonMoviesDao.getData();
 			String errorMessage = (responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) instanceof String) ? (String) responseData.get(Constants.TMDB_RESPONSE_ERROR_MESSAGE) : null;
-			throw new TmdbApiException(errorMessage);
+			throw new CinemateException("TMDB: " + errorMessage);
 		}		
 		
 		setActionComplete(true);
