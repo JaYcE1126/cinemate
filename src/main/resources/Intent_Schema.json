@@ -107,7 +107,7 @@
       "intent": "KeepGoing"
     },
     {
-      "intent": "Repeat"
+      "intent": "AMAZON.RepeatIntent"
     },
     {
       "intent": "AMAZON.HelpIntent"
@@ -122,10 +122,10 @@
       "intent": "TryAgain"
     },
     {
-      "intent": "Yes"
+      "intent": "AMAZON.YesIntent"
     },
     {
-      "intent": "No"
+      "intent": "AMAZON.NoIntent"
     },
     {
     	"intent": "CustomStop"

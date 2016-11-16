@@ -5,8 +5,8 @@ public class Constants {
 	/*
 	 * Intent Names
 	 */
-	public static final String INTENT_YES = "Yes";
-	public static final String INTENT_NO = "No";
+	public static final String INTENT_YES = "AMAZON.YesIntent";
+	public static final String INTENT_NO = "AMAZON.NoIntent";
 	public static final String INTENT_GET_MOVIE_INFO = "GetMovieInfo";
 	public static final String INTENT_GET_MOVIE_PLOT = "GetMoviePlot";
 	public static final String INTENT_GET_MOVIE_RELEASE_DATE = "GetMovieReleaseDate";
@@ -22,7 +22,7 @@ public class Constants {
 	public static final String INTENT_GET_STREAMING_SOURCES = "GetStreamingSources";
 	public static final String INTENT_KEEP_GOING = "KeepGoing";
 	public static final String INTENT_TRY_AGAIN = "TryAgain";
-	public static final String INTENT_REPEAT = "Repeat";
+	public static final String INTENT_REPEAT = "AMAZON.RepeatIntent";
 	public static final String INTENT_CUSTOM_STOP = "CustomStop";
 	public static final String INTENT_STOP = "AMAZON.StopIntent";
 	public static final String INTENT_HELP = "AMAZON.HelpIntent";
@@ -46,7 +46,7 @@ public class Constants {
 	public static final String URL_TMDB_SEARCH_MOVIE = "https://api.themoviedb.org/3/search/movie?api_key=39e754ea863578c2a6c6f1b518d62443&query=";
 	public static final String URL_TMDB_SEARCH_ACTOR = "https://api.themoviedb.org/3/search/person?api_key=39e754ea863578c2a6c6f1b518d62443&query=";
 	public static final String URL_TMDB_MOVIE_INFO = "https://api.themoviedb.org/3/movie/###?api_key=39e754ea863578c2a6c6f1b518d62443&append_to_response=credits";
-	public static final String URL_TMDB_POSTER_PATH = "https://image.tmdb.org/t/p/";
+	public static final String URL_TMDB_POSTER_PATH = "https://image.tmdb.org/t/p/w185";
 	public static final String URL_TMDB_DISCOVER_COMMON_MOVIES = "https://api.themoviedb.org/3/discover/movie?api_key=39e754ea863578c2a6c6f1b518d62443&with_cast=";
 	public static final String URL_GB_SEARCH_ID = "https://api-public.guidebox.com/v1.43/US/rKQGwLJ0FLqoHUU8oyKEwce6arOgwGmM/search/movie/id/themoviedb/";
 	public static final String URL_GB_MOVIE_INFOL = "https://api-public.guidebox.com/v1.43/US/rKQGwLJ0FLqoHUU8oyKEwce6arOgwGmM/movie/";

@@ -86,9 +86,8 @@ public class GetMovieAction extends Action{
 			logger.debug("movieIdList: [{}]", movieIdList);
 			logger.debug("movieIdIndex: [{}]", movieIdIndex);
 			MovieIdWrapper miw = movieIdList.get(movieIdIndex);
-			String initSentence = Sentences.confirmMovieInvalidIntent + Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate());
-			setDialogIsAsk(initSentence, Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
-
+			setDialogIsAsk(Sentences.confirmMovieInvalidIntent(miw.getMovieTitle(), miw.getMovieReleaseDate()),
+					Sentences.confirmMovieReprompt(miw.getMovieTitle(), miw.getMovieReleaseDate()));
 		}
 		logger.info("Exited");
 	}

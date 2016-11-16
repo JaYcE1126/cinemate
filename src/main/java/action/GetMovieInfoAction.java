@@ -51,9 +51,9 @@ public class GetMovieInfoAction extends GetMovieAction{
 		logger.info("Entered: [intentName: {}]", intentName);
 
 		super.reattempt(intentName, session);
-		setMovieInfo();
-		if (super.movie!=null)
-			actionSuccess();
+		
+		if (super.movieId != -1) setMovieInfo();
+		if (super.movie!=null) actionSuccess();
 		
 		logger.info("Exited");
 	}

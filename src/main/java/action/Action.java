@@ -32,13 +32,13 @@ public abstract class Action {
 	}
 	
 	public void setDialogIsTell(String initSentence){
-		logger.trace("Entered: [initSentence: {}, isTell: true]", initSentence);
+		logger.debug("Entered: [initSentence: {}, isTell: true]", initSentence);
 		alexaResponse.setIsTell(true);
 		alexaResponse.setInitSentence(initSentence);
 		logger.trace("Exited");
 	}
 	public void setDialogIsTell(String initSentence, String cardTitle, String cardContent){
-		logger.trace("Entered: [initSentence: {}, cardTitle: {}, cardContent: {}, isTell: true]",
+		logger.debug("Entered: [initSentence: {}, cardTitle: {}, cardContent: {}, isTell: true]",
 				initSentence, cardTitle, cardContent);
 		alexaResponse.setIsTell(true);
 		alexaResponse.setInitSentence(initSentence);
@@ -46,7 +46,7 @@ public abstract class Action {
 		logger.trace("Exited");
 	}
 	public void setDialogIsTell(String initSentence, String cardTitle, String cardContent, String imagePath){
-		logger.trace("Entered: [initSentence: {}, cardTitle: {}, cardContent: {}, imagePath: {}, isTell: true]", 
+		logger.debug("Entered: [initSentence: {}, cardTitle: {}, cardContent: {}, imagePath: {}, isTell: true]", 
 				initSentence, cardTitle, cardContent, imagePath);
 		alexaResponse.setIsTell(true);
 		alexaResponse.setInitSentence(initSentence);
@@ -55,14 +55,14 @@ public abstract class Action {
 	}
 	
 	public void setDialogIsAsk(String initSentence, String reprompt){
-		logger.trace("Entered: [initSentence: {}, reprompt: {}, isTell: true]", initSentence, reprompt);
+		logger.debug("Entered: [initSentence: {}, reprompt: {}, isTell: true]", initSentence, reprompt);
 		alexaResponse.setIsTell(false);
 		alexaResponse.setInitSentence(initSentence);
 		alexaResponse.setRepromptSentence(reprompt);
 		logger.trace("Exited");
 	}
 	public void setDialogIsAsk(String initSentence, String reprompt, String cardTitle, String cardContent){
-		logger.trace("Entered: [initSentence: {}, reprompt: {}, cardTitle: {}, cardContent: {}, isTell: true]", 
+		logger.debug("Entered: [initSentence: {}, reprompt: {}, cardTitle: {}, cardContent: {}, isTell: true]", 
 				initSentence, reprompt, cardTitle, cardContent);
 
 		alexaResponse.setIsTell(false);
@@ -73,7 +73,7 @@ public abstract class Action {
 
 	}
 	public void setDialogIsAsk(String initSentence, String reprompt, String cardTitle, String cardContent, String imagePath){
-		logger.trace("Entered: [initSentence: {}, reprompt: {}, cardTitle: {}, cardContent: {}, imagePath, isTell: true]", 
+		logger.debug("Entered: [initSentence: {}, reprompt: {}, cardTitle: {}, cardContent: {}, imagePath {}, isTell: true]", 
 				initSentence, reprompt, cardTitle, cardContent, imagePath);
 		alexaResponse.setIsTell(false);
 		alexaResponse.setInitSentence(initSentence);

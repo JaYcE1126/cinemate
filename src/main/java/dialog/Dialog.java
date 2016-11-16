@@ -1,5 +1,8 @@
 package dialog;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.Card;
 import com.amazon.speech.ui.Image;
@@ -9,7 +12,7 @@ import com.amazon.speech.ui.StandardCard;
 
 public class Dialog {
 	
-	//private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
+	private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
 
 	private SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
 	private SsmlOutputSpeech repromptOS = new SsmlOutputSpeech();
@@ -41,12 +44,14 @@ public class Dialog {
 	}
 	
 	public void setCardContent(String cardTitle, String cardContent, String imagePath){
+		logger.debug("imagePath: {}", imagePath);
 		Image cardImage = new Image();
 		cardImage.setLargeImageUrl(imagePath);
 		
 		this.card.setTitle(cardTitle);
 		this.card.setText(cardContent);
 		this.card.setImage(cardImage);
+		
 	}
 	public Card getCard(){
 		return this.card;

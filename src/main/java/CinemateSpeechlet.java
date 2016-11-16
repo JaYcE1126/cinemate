@@ -237,7 +237,12 @@ public class CinemateSpeechlet implements Speechlet {
 
 	public void onSessionEnded(final SessionEndedRequest request, final Session session) throws SpeechletException {
 		logger.info("--END SESSION--: onSessionEnded requestId={}, sessionId={}", request.getRequestId(),session.getSessionId());
+		
 		// any cleanup logic goes here   
+	}
+	
+	public Dialog getDialog(){
+		return dialog;
 	}
 
 	

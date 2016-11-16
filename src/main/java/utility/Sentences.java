@@ -69,6 +69,24 @@ public class Sentences {
 		return sentence.toString();
 	}
 	
+		
+	public static String confirmMovieInvalidIntent(String movieTitle, String releaseDate){
+		logger.debug("Entered: [movieTitle: {}, releaseDate: {}]", movieTitle, releaseDate);
+
+		StringBuilder sentence = new StringBuilder("<speak><s>Your response is invalid.</s>");
+		
+		sentence.append("<s>Please say Yes or No, or you can stay Stop at any time.</s>");
+		sentence.append("<s>Is ");
+		sentence.append(movieTitle);
+		sentence.append(" released on ");
+		sentence.append(releaseDate);
+		sentence.append(" the movie you are looking for? </s>");
+		sentence.append("</speak>");
+		
+		logger.debug("Exited: [sentence: {}]",sentence.toString());
+		return sentence.toString();
+	}
+	
 	public static String confirmMovieReprompt(String movieTitle, String releaseDate){
 		logger.debug("Entered: [movieTitle: {}, releaseDate: {}]", movieTitle, releaseDate);
 
@@ -111,10 +129,6 @@ public class Sentences {
 	public static String confirmMovieNoneSelectedReprompt = 
 			"<s>Please try your request again and clearly state the movie of interest.</s></speak>";
 
-	
-	public static String confirmMovieInvalidIntent =
-		"<speak><s>Your response is invalid.</s>";
-	
 	public static String invalidIntent =
 			"<speak><s>Your request is invalid.</s><s> I've sent a list of information I can provide to your Alexa App.</s><s> Now, go ahead and ask me what you would like to know.</s></speak>";
 
@@ -519,7 +533,7 @@ public class Sentences {
 	public static final String stopAction =
 			"<speak>" + 
 			"<s>Your request has been cancelled.</s>" +
-			"<s>Please tell what else you would like to know.</s>" +
+			"<s>Please tell me what else you would like to know.</s>" +
 			"</speak>";
 	
 	public static final String stopActionReprompt =

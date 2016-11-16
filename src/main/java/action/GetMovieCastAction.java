@@ -56,15 +56,14 @@ public class GetMovieCastAction extends GetMovieAction{
 			logger.debug("index: [{}]", index);
 			logger.debug("movie.getCast().size: [{}]", movie.getCast().size());
 			if (index >= movie.getCast().size()) index = 0;
+			actionSuccess();
 
 		} else {
 			super.reattempt(intentName, session);
-			setMovieInfo();
+			if (super.movieId != -1) setMovieInfo();
+			if (super.movie!=null) actionSuccess();			
 		}
-		if (super.movie!=null) {
-			actionSuccess();
-			//session.setAttribute(Constants.SESSION_KEY_ACTION, this);
-		}
+
 		logger.info("Exited");
 	}
 	

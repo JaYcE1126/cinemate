@@ -99,7 +99,6 @@ public class CinemateTest {
 				
 				slots.put("movieTitle",  slot1);
 			}
-
 			
 			com.amazon.speech.slu.Intent.Builder b = Intent.builder();
 			b.withName(intent);

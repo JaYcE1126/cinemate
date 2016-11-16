@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import exception.CinemateException;
 import utility.Constants;
 
 public class Movie {
 
-  private static final Logger logger = LoggerFactory.getLogger(Movie.class);	
+  //private static final Logger logger = LoggerFactory.getLogger(Movie.class);	
 	
   private String id;
 	private String title;
@@ -55,6 +52,7 @@ public class Movie {
 			
 		plot = (movieInfo.get(Constants.TMDB_RESPONSE_PLOT) instanceof String) ? (String) movieInfo.get(Constants.TMDB_RESPONSE_PLOT) : null;
 		posterLocation = (movieInfo.get(Constants.TMDB_RESPONSE_POSTER_PATH) instanceof String) ? (String) movieInfo.get(Constants.TMDB_RESPONSE_POSTER_PATH) : null;
+		posterLocation = Constants.URL_TMDB_POSTER_PATH + posterLocation;
 		releaseDate = (movieInfo.get(Constants.TMDB_RESPONSE_RELEASE_DATE) instanceof String) ? (String) movieInfo.get(Constants.TMDB_RESPONSE_RELEASE_DATE) : null;
 		runtime = (movieInfo.get(Constants.TMDB_RESPONSE_RUNTIME) instanceof String) ? (String) movieInfo.get(Constants.TMDB_RESPONSE_RUNTIME) : null;
 		originalMusicComposers = (movieInfo.get(Constants.TMDB_RESPONSE_CREDITS_COMPOSER) instanceof List) ? (List<String>) movieInfo.get(Constants.TMDB_RESPONSE_CREDITS_COMPOSER) : null;
@@ -86,9 +84,8 @@ public class Movie {
 	}
 	
 	public String getPosterLocation(){
-		logger.debug("posterLocation = {}w185{}",Constants.URL_TMDB_POSTER_PATH, this.posterLocation);
 		if ("".equals(posterLocation) || posterLocation == null) return "";
-		return Constants.URL_TMDB_POSTER_PATH + "w185" + this.posterLocation;
+		return this.posterLocation;
 	}
 	
 	public String getRuntime(){

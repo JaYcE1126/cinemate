@@ -426,15 +426,6 @@ GetMovieRuntime tell me the run time for it
 GetMovieRuntime tell me how long it is
 GetMovieRuntime give me the run time for it
 GetMovieRuntime give me the running time for it
-Yes yes
-Yes yes please
-Yes sure
-Yes yupp
-Yes yes that one
-No no
-No no thank you
-No nope
-No not that one
 TryAgain try again
 TryAgain try again please
 TryAgain I'd like to try again
@@ -446,15 +437,6 @@ KeepGoing keep going
 KeepGoing continue
 KeepGoing Please keep going
 KeepGoing Please continue
-Repeat repeat
-Repeat say that again
-Repeat what did you say
-Repeat what did you just say
-Repeat please repeat that
-Repeat please repeat
-Repeat say it again
-Repeat repeat that
-Repeat repeat that please
 CustomStop I am done
 CustomStop I'm done
 CustomStop No Thank you
