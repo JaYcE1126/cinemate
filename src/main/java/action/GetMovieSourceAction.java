@@ -61,8 +61,8 @@ public class GetMovieSourceAction extends GetMovieAction {
 	
 	public void reattempt(String intentName, Session session) throws CinemateException{
 		logger.info("Entered: [intentName: {}]", intentName);
-
 		super.reattempt(intentName, session);
+		
 		if (movieId != -1) {
 			setMovieInfo();
 			setGbMovieId();
@@ -129,6 +129,7 @@ public class GetMovieSourceAction extends GetMovieAction {
 			actionSuccess();
 			
 		} else if(daoReturnCode == 1)	{
+			setActionComplete(true);
 			setDialogIsAsk(Sentences.noMovieSources(movie.getTitle()), Sentences.noMovieSourcesReprompt);
 			
 		} else {

@@ -157,7 +157,7 @@ public class Sentences {
 		sentence.append(mins);
 		sentence.append(" minutes.</s><s>It's plot is: ");
 		sentence.append(movie.getPlot().replaceAll("\\.", "</s><s>"));
-		sentence.append("What else would you like to know about ");
+		sentence.append(". What else would you like to know about ");
 		sentence.append(movie.getTitle());
 		sentence.append("</s></speak>");
 
@@ -416,7 +416,7 @@ public class Sentences {
 			sentence.append(movie.getTitle()); 
 			sentence.append(" is: ");
 			sentence.append(movie.getPlot().replaceAll("\\.", "</s><s>"));
-			sentence.append("What else would you like to know about this movie? ");
+			sentence.append(". What else would you like to know about this movie? ");
 			sentence.append(".</s></speak>");
 		} else {
 			sentence.append("I cannot find the plot information on ");
@@ -520,7 +520,7 @@ public class Sentences {
 	
 	public static final String tryAgain =
 			"<speak>" + 
-			"<s>Sure!  Please say restate your request or you can ask me for something else.</s>" +
+			"<s>Sure!  Please restate your request or you can ask me for something else.</s>" +
 			"</speak>";
 	
 	public static final String tryAgainReprompt =

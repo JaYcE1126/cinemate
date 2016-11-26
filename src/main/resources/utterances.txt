@@ -309,6 +309,8 @@ GetMovieReleaseDate On what date was this movie released
 GetMovieReleaseDate On which date was this movie released
 GetMovieReleaseDate On what day was this movie released
 GetMovieReleaseDate On which day was this movie released
+GetMovieReleaseDate When did {movieTitle} come out
+GetMovieReleaseDate When did it come out
 GetMovieCast Cast of {movieTitle}
 GetMovieCast Cast of it
 GetMovieCast Cast of this movie

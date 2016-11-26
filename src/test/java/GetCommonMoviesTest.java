@@ -89,13 +89,13 @@ public class GetCommonMoviesTest {
 		SpeechletResponse sr = cs.onIntent(ir, session);
 		
 		String outputSpeech = "<speak><s>I've found the following 12 in common between actors Walter Matthau and Jack Lemmon: "
-				+ "JFK, Grumpy Old Men, Grumpier Old Men, The Front Page, The Fortune Cookie, The Odd Couple, The Odd Couple II, "
-				+ "Buddy Buddy, Out to Sea, The Grass Harp, Portrait of a '60% Perfect Man': Billy Wilder, and The Gentleman Tramp</s>"
-				+ "<s>What else would you like me to tell you?</s></speak>"; 
+				+ "JFK, Grumpy Old Men, Grumpier Old Men, The Odd Couple, The Front Page, Buddy Buddy, The Fortune Cookie, Out to Sea, "
+				+ "The Odd Couple II, The Grass Harp, The Gentleman Tramp, and Portrait of a '60% Perfect Man': Billy Wilder</s><s>What "
+				+ "else would you like me to tell you?</s></speak>"; 
 			
-
+		System.out.println(outputSpeech);
+		System.out.println(cs.getDialog().getInitSentence().getSsml());
 		System.out.println(cs.getDialog().getInitSentence().getSsml().equals(outputSpeech));
-
 		
 		assertTrue("GetCommonMovies Init Sentence Mismatch",cs.getDialog().getInitSentence().getSsml().equals(outputSpeech));
 		

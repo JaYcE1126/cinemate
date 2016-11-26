@@ -53,6 +53,7 @@ public class GetMovieAction extends Action{
 			this.movieIdIndex++;
 			
 			if (movieIdIndex >= movieIdList.size()){
+				setActionComplete(true);
 				setDialogIsAsk(Sentences.confirmMovieNoneSelected,Sentences.confirmMovieNoneSelectedReprompt);
 				
 			} else {
