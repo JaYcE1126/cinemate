@@ -16,7 +16,7 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 
 public class MovieTest {
 
-	@Test
+	//@Test
 	public void test() throws SpeechletException  {
 		//fail("Not yet implemented");
 		//testMovie();

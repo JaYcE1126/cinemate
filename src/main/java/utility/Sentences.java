@@ -34,8 +34,8 @@ public class Sentences {
 	
 	public static final String help = 
 			"<speak>" + 
-			"<s>You can ask Cinemate to provide you with the following information for all kinds of movie information such as:</s>"+
-			"<s>A movie's plot, release date, director, producer, writer, or composer.</s>" +
+			"<s>You can ask Cinemate to provide you with the following information such as:</s>"+
+			"<s>Where is a movie available for streaming or a movie's plot, release date, director, producer, writer, or composer.</s>" +
 			"<s>You can also ask for a list of a movie's cast members or common movies between two actors.</s>" +
 			"<s>I've sent a list of information I can provide to the Alexa app on your phone.</s>" +
 			"<s>Now, go ahead, tell me what more you would like to know?</s>" + 
@@ -157,7 +157,7 @@ public class Sentences {
 		sentence.append(mins);
 		sentence.append(" minutes.</s><s>It's plot is: ");
 		sentence.append(movie.getPlot().replaceAll("\\.", "</s><s>"));
-		sentence.append(". What else would you like to know about ");
+		sentence.append(" What else would you like to know about ");
 		sentence.append(movie.getTitle());
 		sentence.append("</s></speak>");
 
@@ -493,7 +493,7 @@ public class Sentences {
 		
 		sentence.append("<s>I've found the following ");
 		sentence.append(commonMovies.size());
-		sentence.append(" in common between actors ");
+		sentence.append(" movies in common between actors ");
 		sentence.append(actors.get(0).getName());
 		sentence.append(" and ");
 		sentence.append(actors.get(1).getName());

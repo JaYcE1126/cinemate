@@ -22,7 +22,7 @@ import utility.Utilities;
 
 public class GetCommonMoviesTest {
 
-	@Test
+	//@Test
 	public void test() throws SpeechletException  {
 
 		Map<String, Slot> slots = new HashMap<String, Slot>();
@@ -88,7 +88,7 @@ public class GetCommonMoviesTest {
 		
 		SpeechletResponse sr = cs.onIntent(ir, session);
 		
-		String outputSpeech = "<speak><s>I've found the following 12 in common between actors Walter Matthau and Jack Lemmon: "
+		String outputSpeech = "<speak><s>I've found the following 12 movies in common between actors Walter Matthau and Jack Lemmon: "
 				+ "JFK, Grumpy Old Men, Grumpier Old Men, The Odd Couple, The Front Page, Buddy Buddy, The Fortune Cookie, Out to Sea, "
 				+ "The Odd Couple II, The Grass Harp, The Gentleman Tramp, and Portrait of a '60% Perfect Man': Billy Wilder</s><s>What "
 				+ "else would you like me to tell you?</s></speak>"; 
