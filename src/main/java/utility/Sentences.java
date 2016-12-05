@@ -127,7 +127,7 @@ public class Sentences {
 			"<s>Please try your request again and clearly state the movie of interest.</s></speak>";
 			
 	public static String confirmMovieNoneSelectedReprompt = 
-			"<s>Please try your request again and clearly state the movie of interest.</s></speak>";
+			"<speak><s>Please try your request again and clearly state the movie of interest.</s></speak>";
 
 	public static String invalidIntent =
 			"<speak><s>Your request is invalid.</s><s> I've sent a list of information I can provide to your Alexa App.</s><s> Now, go ahead and ask me what you would like to know.</s></speak>";
